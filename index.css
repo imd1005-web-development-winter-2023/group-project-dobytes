@@ -5,6 +5,7 @@
 
 body {
     font-family: myFont;
+    color: white
 }
 
 header {
@@ -22,4 +23,13 @@ header {
     flex-direction: column;
     align-items: center;
     color: aqua;
+}
+
+#myvideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -10;
 }

@@ -5,6 +5,10 @@
 
 body {
     font-family: myFont;
+    background-image: url(sprites/red.png);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size:100%;
 }
 
 header {

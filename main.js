@@ -102,7 +102,7 @@ document.addEventListener("keyup",function(event){
   //87 is W
 
   if (event.keyCode===32||event.keyCode===38||event.keyCode===87){
-   countJumpHeight=false;
+    //jumpKeyIsDown = false;
   }
   //40 is down arrow
   //83 is S
@@ -131,12 +131,31 @@ let timer1 = setInterval(timer, 10);
 //clearInterval(timer);
 
 //to check for height of jump when held
-let countJumpHeight = false;
+let  playerIsJumping = false;
+
+let height = 0;
+let heightSpeed = 1;
+let maxHeight = 60;
+let jumpSpeed = 4;
+let groundHeight = 20;
+let playerHeight = 0;
+let x=0;
+let xSpeed=0.2;
+let parabolaNum=6;
+let parabolaSpeed=0.1;
+
+let jumpKeyIsDown = false;
 
 function playerUp(){
-  console.log("playerUp");
+  //console.log("playerUp");
   //make a countJumpHeight to true
-  countJumpHeight = true;
+  //if the player is on the ground, then you can jump
+  console.log(player.style.bottom);
+  if (player.style.bottom>0){
+    jumpKeyIsDown = true;
+  }
+  
+  playerIsJumping=true;
   
 }
 
@@ -146,39 +165,26 @@ function playerDown(){
 
 
 
-let height = 0;
-let heightSpeed = 1;
-let maxHeight = 100;
-let jumpSpeed = 4;
-let playerHeight = 70;
-
 function timer(){
-  
-  //let playerYFromGround = playerRect.top - groundRect.top;
-
-  //console.log("player Y is ",playerYFromGround);
-
-  //console.log("timer is running");
-
   //first thing i do, i check if the key is pressed down
   //i count how long the key is pressed for
   //when key up, or when the key is held for a certain amount of time,
   //the parabola starts
-  
-  if (countJumpHeight){
-    if (height<10){
-      height+=heightSpeed*-1;
+
+  if (playerIsJumping){
+    console.log(jumpKeyIsDown);
+    if (height<maxHeight&&jumpKeyIsDown){
+      //console.log("hi");
+      height+=heightSpeed;
       console.log("height",height);
-      //move the player up
-      playerHeight+=1;
-    } else {
-      //player parabola
-
-
+      //increase parabola speed
+      parabolaNum+=parabolaSpeed;
     }
+    x+=xSpeed;
+    //playerHeight=(-1*(x-parabolaNum)**2)+(parabolaNum**2);
   }
   //set player top to playerHeight
-  player.style.bottom=playerHeight+"vh";
+  player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
   console.log(player.style.top);
   
 }

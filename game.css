@@ -11,3 +11,21 @@ header {
     display: flex;
     justify-content: space-around; 
 }
+.ground{
+    position: fixed;
+    bottom: 0px;
+    background-color: aqua;
+    width: 100%;
+    height: 20vh;
+}
+
+.player{
+    background-color: red;
+    height: 10vh;
+    width: 10vh;
+    position: fixed;
+    bottom: 20vh;
+    left: 35vh;
+}
+
+

@@ -98,6 +98,8 @@ let parabolaSpeed=0.3;
 
 let jumpKeyIsDown = false;
 let downHasNotBeenPressed = true;
+let isNotDecreasing = true;
+let currentY = 0;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -168,22 +170,14 @@ function playerDown(){
   //can only press once, so downHasNotBeenPressed is used
   if (playerIsJumping&&downHasNotBeenPressed){
     downHasNotBeenPressed = false;
-    //if its increasing, get the same y but on the descending side to make it go down
-    if (x<parabolaNum-2){
-      //if increasing,
-      //x = midpoint*2-x
-      x=parabolaNum*2-x;
-    } else if (x>parabolaNum){
-      //if decreasing, just speed it up cause already fast decreasing
-      x+=1;
-    } else {
-      //if near the top, increase
-      x+=2;
-    }
+    //change the parabola equation to a decreasing one from the y that you are at
+    currentY=(playerHeight*0.4+groundHeight);
+    x=0;
+    isNotDecreasing=false;
   }
 }
 
-
+let parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
 
 function timer(){
   //first thing i do, i check if the key is pressed down
@@ -204,18 +198,33 @@ function timer(){
     playerHeight=(-1*(x-parabolaNum)**2)+(parabolaNum**2);
   }
   //set player top to playerHeight
-  if (playerHeight*0.4+groundHeight>=20){
-    player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
+  
+    if (isNotDecreasing&&playerHeight*0.4+groundHeight>=20){
+      //if its about to teleport underneath the floor, set to 20 (ground height)
+      if (isNotDecreasing&&playerHeight*0.4+groundHeight<20){
+        player.style.bottom=20+"vh";
+      } else {
+        player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
+      }
+    } else if (-1*((3+x)**2)+9+currentY>=20){
+      //if its about to teleport underneath the floor, set to 20 (ground height)
+      if (-1*((3+x)**2)+9+currentY<20){
+        player.style.bottom=20+"vh";
+      } else {
+        player.style.bottom = (-1*((5+x)**2)+25+currentY)+"vh";
+      }
     //console.log(player.style.top);
   } else {
     //if on ground, reset
-    player.style.bottom=20+"vh";
+    //player.style.bottom=20+"vh";
     height=0;
     playerHeight=0;
     playerIsJumping=false;
     parabolaNum=5;
     x=0;
     downHasNotBeenPressed= true;
+    isNotDecreasing = true;
+    //parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
 
   }
   

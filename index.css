@@ -9,25 +9,23 @@ body {
     font-size: 2rem;
 }
 
-header {
-    
-}
-
 .title {
     display: flex;
     justify-content: center; 
     align-items: center;
     font-size: 4rem;
+    padding: 30px;
 }
 
 .title img {
     height: auto;
-    width: 140px;
+    width: 130px;
 }
 
 .home {
    display: flex;
    justify-content: space-around;
+   padding-top: 20px;
 }
 
 .buttons {
@@ -35,6 +33,11 @@ header {
     flex-direction: column;
     align-items: center;
     border: 3px solid red;
+    padding: 50px;
+}
+
+button {
+    padding: 10px;
 }
 
 .leaderboard {

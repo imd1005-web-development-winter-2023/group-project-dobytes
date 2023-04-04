@@ -150,7 +150,7 @@ let height = 0;
 let heightSpeed = 1;
 let maxHeight = 100;
 let jumpSpeed = 4;
-let playerHeight = 0;
+let playerHeight = 70;
 
 function timer(){
   
@@ -178,7 +178,7 @@ function timer(){
     }
   }
   //set player top to playerHeight
-  player.style.top=playerHeight+"vh";
+  player.style.bottom=playerHeight+"vh";
   console.log(player.style.top);
   
 }

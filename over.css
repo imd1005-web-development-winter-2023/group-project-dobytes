@@ -1,0 +1,28 @@
+@font-face {
+    font-family: myFont;
+    src: url(amongusRegular.ttf);
+}
+
+body {
+    font-family: myFont;
+}
+
+header {
+    display: flex;
+    justify-content: center; 
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+}
+
+.dead {
+    display: flex;
+    justify-content: center; 
+}
+
+.buttons {
+    display: flex;
+    justify-content: center; 
+}

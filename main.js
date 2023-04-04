@@ -78,6 +78,27 @@ inititialise();
 let player = document.querySelector(".player");
 let ground = document.querySelector(".ground");
 
+//start a timer
+let timer1 = setInterval(timer, 10);
+//clearInterval(timer);
+
+//to check for height of jump when held
+let  playerIsJumping = false;
+
+let height = 0;
+let heightSpeed = 1;
+let maxHeight = 20;
+let jumpSpeed = 4;
+let groundHeight = 20;
+let playerHeight = 0;
+let x=0;
+let xSpeed=0.2;
+let parabolaNum=5;
+let parabolaSpeed=0.3;
+
+let jumpKeyIsDown = false;
+let downHasNotBeenPressed = true;
+
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -102,7 +123,7 @@ document.addEventListener("keyup",function(event){
   //87 is W
 
   if (event.keyCode===32||event.keyCode===38||event.keyCode===87){
-    //jumpKeyIsDown = false;
+    jumpKeyIsDown = false;
   }
   //40 is down arrow
   //83 is S
@@ -126,32 +147,14 @@ document.addEventListener("mousedown",function(event){
 })
 */
 
-//start a timer
-let timer1 = setInterval(timer, 10);
-//clearInterval(timer);
 
-//to check for height of jump when held
-let  playerIsJumping = false;
-
-let height = 0;
-let heightSpeed = 1;
-let maxHeight = 60;
-let jumpSpeed = 4;
-let groundHeight = 20;
-let playerHeight = 0;
-let x=0;
-let xSpeed=0.2;
-let parabolaNum=6;
-let parabolaSpeed=0.1;
-
-let jumpKeyIsDown = false;
 
 function playerUp(){
   //console.log("playerUp");
   //make a countJumpHeight to true
   //if the player is on the ground, then you can jump
   console.log(player.style.bottom);
-  if (player.style.bottom>0){
+  if (height==0){
     jumpKeyIsDown = true;
   }
   
@@ -161,6 +164,23 @@ function playerUp(){
 
 function playerDown(){
   console.log("playerDown");
+  //if down, shift the x value over so its decreasing
+  //can only press once, so downHasNotBeenPressed is used
+  if (playerIsJumping&&downHasNotBeenPressed){
+    downHasNotBeenPressed = false;
+    //if its increasing, get the same y but on the descending side to make it go down
+    if (x<parabolaNum-2){
+      //if increasing,
+      //x = midpoint*2-x
+      x=parabolaNum*2-x;
+    } else if (x>parabolaNum){
+      //if decreasing, just speed it up cause already fast decreasing
+      x+=1;
+    } else {
+      //if near the top, increase
+      x+=2;
+    }
+  }
 }
 
 
@@ -181,10 +201,23 @@ function timer(){
       parabolaNum+=parabolaSpeed;
     }
     x+=xSpeed;
-    //playerHeight=(-1*(x-parabolaNum)**2)+(parabolaNum**2);
+    playerHeight=(-1*(x-parabolaNum)**2)+(parabolaNum**2);
   }
   //set player top to playerHeight
-  player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
-  console.log(player.style.top);
+  if (playerHeight*0.4+groundHeight>=20){
+    player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
+    //console.log(player.style.top);
+  } else {
+    //if on ground, reset
+    player.style.bottom=20+"vh";
+    height=0;
+    playerHeight=0;
+    playerIsJumping=false;
+    parabolaNum=5;
+    x=0;
+    downHasNotBeenPressed= true;
+
+  }
+  
   
 }

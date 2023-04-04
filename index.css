@@ -10,9 +10,19 @@ body {
 }
 
 header {
+    
+}
+
+.title {
     display: flex;
     justify-content: center; 
+    align-items: center;
     font-size: 4rem;
+}
+
+.title img {
+    height: auto;
+    width: 140px;
 }
 
 .home {
@@ -29,7 +39,16 @@ header {
 
 .leaderboard {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     border: 3px solid red;
+}
+
+.leaderboard img {
+    height: auto;
+    width: 50px;
+    border: 3px solid greenyellow;
 }
 
 #myvideo {

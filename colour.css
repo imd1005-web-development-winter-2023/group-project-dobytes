@@ -17,6 +17,16 @@ header {
     justify-content: space-around;
 }
 
+.colours img{
+    width: 20vh;
+    height: auto;
+}
+
+.brown{
+    display: flex;
+    justify-content: center;
+}
+
 .button {
     display: flex;
     justify-content: center;

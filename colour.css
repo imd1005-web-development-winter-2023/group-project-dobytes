@@ -24,7 +24,37 @@ header {
 
 .brown{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.blue{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pink{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.red{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.green{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .button {
@@ -34,4 +64,5 @@ header {
 
 p {
     font-size: 2rem;
+    
 }

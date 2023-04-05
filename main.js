@@ -127,6 +127,8 @@ let alive=false;
 
 let stopTimerAfterExplosionCounter = 0;
 
+let timerNotStarted = true;
+
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -190,8 +192,14 @@ function playerUp(){
     document.querySelector(".start").style.display = "none";
     //alive
     alive=true;
-    //start the timer
-    timer1 = setInterval(timer, 8);
+
+    //only start the timer once, to fix going fast at the start bug
+    //cause by starting multiple timers because of keydown
+    if (timerNotStarted){
+      timerNotStarted=false;
+      //start the timer
+      timer1 = setInterval(timer, 8);
+    } 
   } else {
     //console.log("playerUp");
     //make a countJumpHeight to true

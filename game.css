@@ -29,4 +29,44 @@ header {
     left: 35vh;
 }
 
+.test{
+    background-color: green;
+    position: fixed;
+}
+
+.obstacle1{
+    /*short box*/
+    height: 10vh;
+    width: 10vh;
+    bottom: 20vh;
+    background-image: "";
+}
+.obstacle2{
+    /*long box*/
+    height: 10vh;
+    width: 20vh;
+    bottom: 20vh;
+    background-image: "";
+}
+.obstacle3{
+    /*flying kinfe*/
+    height: 5vh;
+    width: 10vh;
+    bottom: 30vh;
+    background-image: "";
+}
+.obstacle4{
+    /*low knife*/
+    height: 5vh;
+    width: 10vh;
+    bottom: 25vh;
+    background-image: "";
+}
+.obstacle5{
+    /*tall box*/
+    height: 20vh;
+    width: 10vh;
+    bottom: 20vh;
+    background-image: "";
+}
 

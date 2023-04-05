@@ -104,6 +104,15 @@ let currentY = 0;
 
 let downKeyIsDown = false;
 
+let randomCounter = 0;
+let randomCounterSpeed = 1;
+let obstacleX = 0;
+let obstacleSpeed = 0.4;
+let nextObstacleAtCounter = 300;
+
+let randomDistance = 400;
+let minDistance = 400;
+
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -223,22 +232,30 @@ function timer(){
   
     if (isNotDecreasing&&playerHeight*0.4+groundHeight>=20){
       //if its about to teleport underneath the floor, set to 20 (ground height)
-      if (isNotDecreasing&&playerHeight*0.4+groundHeight<=20){
+      if (isNotDecreasing&&playerHeight*0.4+groundHeight<20){
         player.style.bottom=20+"vh";
       } else {
         player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
       }
     } else if (-1*((3+x)**2)+9+currentY>=20){
+      /*
       //if its about to teleport underneath the floor, set to 20 (ground height)
-      if (-1*((3+x)**2)+9+currentY<=20){
+      if (-1*((3+x)**2)+9+currentY<20){
         player.style.bottom=20+"vh";
-        console.log("i down");
+        console.log("/////////////////////////////////////////////i down");
         if (downKeyIsDown){
           crouch();
         }
       } else {
-        player.style.bottom = (-1*((5+x)**2)+25+currentY)+"vh";
-      }
+        */if (-1*((5+x)**2)+25+currentY<20){
+          //if its about to teleport underneath the floor, set to 20 (ground height)
+          player.style.bottom=20+"vh";
+          console.log("/////////////////////////////////////////////i down");
+        } else {
+          player.style.bottom = (-1*((5+x)**2)+25+currentY)+"vh";
+        }
+        
+      //}
     //console.log(player.style.top);
   } else {
     //if on ground, reset
@@ -251,5 +268,98 @@ function timer(){
     downHasNotBeenPressed= true;
     isNotDecreasing = true;
     //parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
+
+    if (downKeyIsDown){
+      crouch();
+    }
   }
+
+
+  //random obstacles
+  //adding to the counter based on the speed
+  //counter speed increases over time
+
+  //increasing speed over time
+  randomCounterSpeed+=0.001;
+  randomCounter+=randomCounterSpeed;
+  obstacleX+=obstacleSpeed;
+  //console.log("randomCounter",randomCounter);
+  if (randomCounter >= nextObstacleAtCounter){
+    //reset counter
+    randomCounter=0;
+    //choose when next obstacle
+    //choose random number in a range, with a minimum distance
+    nextObstacleAtCounter = Math.floor(Math.random() * randomDistance) + minDistance;
+    //spawn the obstacle
+    chooseObstacle();
+  }
+
+  //move the obstacles in the list
+  for (let i = 0;i<numberOfObstacles;i++){
+    obstaclesXList[i]+=obstacleSpeed;
+    obstaclesList[i].style.right=obstaclesXList[i]+"vh";
+    //console.log("obstaclesXList[numberOfObstacles]");
+    if (obstaclesXList[i]>140){
+      //if past the screen, delete
+      obstaclesList[i].remove();
+      //numberOfObstacles--;
+
+    }
+  }
+}
+let randomNumber=1;
+function chooseObstacle(){
+  //5 different obstacles:
+  //tall box (10%)
+  //short box (30%)
+  //long box (30%)
+  //flying knife (20%)
+  //low knife (10%)
+
+  //knives will be slightly faster
+  randomNumber = Math.floor(Math.random() * 10) + 1;
+  console.log("randomnumber",randomNumber);
+  if (randomNumber>=1&&randomNumber<=3){
+    //short box (30%)
+    spawnObstacle("obstacle1",10);
+  } else if (randomNumber>=4&&randomNumber<=6){
+    //long box (30%)
+    spawnObstacle("obstacle2",10);
+  } else if (randomNumber>=7&&randomNumber<=8){
+    //flying knife (20%)
+    spawnObstacle("obstacle3",15);
+  } else if (randomNumber==9){
+    //low knife (10%)
+    spawnObstacle("obstacle4",15);
+  } else {
+    //tall box (10%)
+    spawnObstacle("obstacle5",10);
+  }
+}
+
+let obstaclesList = [];
+let numberOfObstacles = 0;
+
+let obstaclesXList = [];
+const main = document.querySelector(".obstaclesSection");
+function spawnObstacle(className,speed){
+  //main.innerHTML="hi";
+  //creating the div
+  //console.log(height,width,y,speed,image);
+  obstaclesList[numberOfObstacles] = document.createElement("div");
+  main.appendChild(obstaclesList[numberOfObstacles]);
+  ///giving it the unique values given for each obstacle
+  obstaclesList[numberOfObstacles].classList.add(className);
+  //obstaclesList[numberOfObstacles].style.image="";
+
+  obstaclesList[numberOfObstacles].innerHTML="hi";
+  obstaclesList[numberOfObstacles].classList.add("test");
+
+  //position
+  obstaclesList[numberOfObstacles].style.right=0+"vh";
+  //keeping the x value
+  obstaclesXList[numberOfObstacles]=0;
+
+  numberOfObstacles++;
+  console.log(obstaclesList);
 }

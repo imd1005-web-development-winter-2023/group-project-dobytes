@@ -129,6 +129,8 @@ let stopTimerAfterExplosionCounter = 0;
 
 let timerNotStarted = true;
 
+let isNotCrouching = true;
+
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -163,6 +165,7 @@ document.addEventListener("keyup",function(event){
   if (event.keyCode===40||event.keyCode===83){
     downKeyIsDown=false;
     //should uncrouch
+    isNotCrouching = true;
     console.log("uncrouch");
     player.style.height= 10+"vh";
     playerImage.style.height= 10+"vh";
@@ -204,11 +207,16 @@ function playerUp(){
     //console.log("playerUp");
     //make a countJumpHeight to true
     //if the player is on the ground, then you can jump
-    console.log(player.style.bottom);
-    if (height==0){
-      jumpKeyIsDown = true;
+
+    //to fix crouching and jumping bug, can only jump if not crouching
+    if (isNotCrouching){
+      console.log(player.style.bottom);
+      if (height==0){
+        jumpKeyIsDown = true;
+      }
+      playerIsJumping=true;
     }
-    playerIsJumping=true;
+    
   }
 }
 
@@ -231,6 +239,7 @@ function playerDown(){
 }
 
 function crouch(){
+  isNotCrouching= false;
   //should crouch
   console.log("crouch");
   player.style.height= 5+"vh";
@@ -263,7 +272,7 @@ function timer(){
     //when key up, or when the key is held for a certain amount of time,
     //the parabola starts
 
-    if (playerIsJumping){
+    if (playerIsJumping&&isNotCrouching){
       console.log(jumpKeyIsDown);
       if (height<maxHeight&&jumpKeyIsDown){
         //console.log("hi");

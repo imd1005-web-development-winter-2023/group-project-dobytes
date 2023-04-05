@@ -75,11 +75,12 @@ inititialise();
 */
 
 //reference the elements
-let player = document.querySelector(".player");
-let ground = document.querySelector(".ground");
+const player = document.querySelector(".player");
+const ground = document.querySelector(".ground");
+const playerImage = document.querySelector(".playerImage");
 
 //start a timer
-let timer1 = setInterval(timer, 10);
+let timer1 = setInterval(timer, 8);
 //clearInterval(timer);
 
 //to check for height of jump when held
@@ -101,6 +102,9 @@ let downHasNotBeenPressed = true;
 let isNotDecreasing = true;
 let currentY = 0;
 
+let downKeyIsDown = false;
+
+
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -114,6 +118,7 @@ document.addEventListener("keydown",function(event){
   //40 is down arrow
   //83 is S
   if (event.keyCode===40||event.keyCode===83){
+    downKeyIsDown=true;
     playerDown();
   }
 })
@@ -126,11 +131,16 @@ document.addEventListener("keyup",function(event){
 
   if (event.keyCode===32||event.keyCode===38||event.keyCode===87){
     jumpKeyIsDown = false;
+    
   }
   //40 is down arrow
   //83 is S
   if (event.keyCode===40||event.keyCode===83){
-    //playerDown();
+    downKeyIsDown=false;
+    //should uncrouch
+    console.log("uncrouch");
+    player.style.height= 10+"vh";
+    playerImage.style.height= 10+"vh";
   }
 })
 
@@ -166,18 +176,30 @@ function playerUp(){
 
 function playerDown(){
   console.log("playerDown");
-  //if down, shift the x value over so its decreasing
-  //can only press once, so downHasNotBeenPressed is used
-  if (playerIsJumping&&downHasNotBeenPressed){
-    downHasNotBeenPressed = false;
-    //change the parabola equation to a decreasing one from the y that you are at
-    currentY=(playerHeight*0.4+groundHeight);
-    x=0;
-    isNotDecreasing=false;
+  if (playerIsJumping){
+    //if down, shift the x value over so its decreasing
+    //can only press once, so downHasNotBeenPressed is used
+    if(downHasNotBeenPressed){
+      downHasNotBeenPressed = false;
+      //change the parabola equation to a decreasing one from the y that you are at
+      currentY=(playerHeight*0.4+groundHeight);
+      x=0;
+      isNotDecreasing=false;
+    }
+  } else {
+    crouch();
   }
+  
 }
 
-let parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
+function crouch(){
+  //should crouch
+  console.log("crouch");
+  player.style.height= 5+"vh";
+  playerImage.style.height= 5+"vh";
+}
+
+//let parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
 
 function timer(){
   //first thing i do, i check if the key is pressed down
@@ -201,15 +223,19 @@ function timer(){
   
     if (isNotDecreasing&&playerHeight*0.4+groundHeight>=20){
       //if its about to teleport underneath the floor, set to 20 (ground height)
-      if (isNotDecreasing&&playerHeight*0.4+groundHeight<20){
+      if (isNotDecreasing&&playerHeight*0.4+groundHeight<=20){
         player.style.bottom=20+"vh";
       } else {
         player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
       }
     } else if (-1*((3+x)**2)+9+currentY>=20){
       //if its about to teleport underneath the floor, set to 20 (ground height)
-      if (-1*((3+x)**2)+9+currentY<20){
+      if (-1*((3+x)**2)+9+currentY<=20){
         player.style.bottom=20+"vh";
+        console.log("i down");
+        if (downKeyIsDown){
+          crouch();
+        }
       } else {
         player.style.bottom = (-1*((5+x)**2)+25+currentY)+"vh";
       }
@@ -225,8 +251,5 @@ function timer(){
     downHasNotBeenPressed= true;
     isNotDecreasing = true;
     //parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
-
   }
-  
-  
 }

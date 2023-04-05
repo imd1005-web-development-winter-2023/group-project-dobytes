@@ -107,11 +107,12 @@ let downKeyIsDown = false;
 let randomCounter = 0;
 let randomCounterSpeed = 1;
 let obstacleX = 0;
-let obstacleSpeed = 0.4;
+let obstacleSpeed = 0.3;
 let nextObstacleAtCounter = 300;
+let speedIncrease = 0.0001;
 
 let randomDistance = 400;
-let minDistance = 400;
+let minDistance = 100;
 
 
 //when key down
@@ -280,7 +281,10 @@ function timer(){
   //counter speed increases over time
 
   //increasing speed over time
-  randomCounterSpeed+=0.001;
+  randomCounterSpeed+=speedIncrease;
+  obstacleSpeed+=speedIncrease;
+
+  //movement/spawning
   randomCounter+=randomCounterSpeed;
   obstacleX+=obstacleSpeed;
   //console.log("randomCounter",randomCounter);

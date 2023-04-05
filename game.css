@@ -28,6 +28,23 @@ header {
     bottom: 20vh;
     left: 35vh;
 }
+.enemy{
+    background-color: red;
+    height: 10vh;
+    width: 10vh;
+    position: fixed;
+    bottom: 20vh;
+    left: 5vh;
+}
+.explosion{
+    background-color: transparent;
+    height: 20vh;
+    width: 20vh;
+    position: fixed;
+    bottom: 20vh;
+    left: 10vh;
+    z-index: 10;
+}
 
 .test{
     background-color: green;
@@ -83,3 +100,23 @@ header {
 .start :nth-child(2){
     font-size: 4vh;
 }
+
+.gameOver{
+    /*border: blue solid 2px;*/
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    top: 30vh;
+    display: none;
+}
+.gameOver :nth-child(1){
+    font-size: 10vh;
+}
+.gameOver :nth-child(2){
+    font-size: 4vh;
+}
+.quitButtonLink{
+    font-size: 4vh;
+    height: 10px;
+}
+

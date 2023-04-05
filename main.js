@@ -120,6 +120,13 @@ let score = 0;
 
 let numberOfDeletedObstacles = 0;
 
+let explosionTime = 0;
+let explosionIsActive = false;
+
+let alive=false;
+
+let stopTimerAfterExplosionCounter = 0;
+
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -181,6 +188,8 @@ function playerUp(){
   if (firstTime){
     //hide the start menu
     document.querySelector(".start").style.display = "none";
+    //alive
+    alive=true;
     //start the timer
     timer1 = setInterval(timer, 8);
   } else {
@@ -223,135 +232,154 @@ function crouch(){
 //let parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
 
 function timer(){
-  //score
-  score+=0.1;
-  //update text
-  document.querySelector(".scoreText").innerHTML="Score: "+Math.floor(score).toString();
-
-
-  //first thing i do, i check if the key is pressed down
-  //i count how long the key is pressed for
-  //when key up, or when the key is held for a certain amount of time,
-  //the parabola starts
-
-  if (playerIsJumping){
-    console.log(jumpKeyIsDown);
-    if (height<maxHeight&&jumpKeyIsDown){
-      //console.log("hi");
-      height+=heightSpeed;
-      console.log("height",height);
-      //increase parabola speed
-      parabolaNum+=parabolaSpeed;
-    }
-    x+=xSpeed;
-    playerHeight=(-1*(x-parabolaNum)**2)+(parabolaNum**2);
+  //explosion
+  if (explosionIsActive){
+    explosionTime+=1;
   }
-  //set player top to playerHeight
-  
-    if (isNotDecreasing&&playerHeight*0.4+groundHeight>=20){
-      //if its about to teleport underneath the floor, set to 20 (ground height)
-      if (isNotDecreasing&&playerHeight*0.4+groundHeight<20){
-        player.style.bottom=20+"vh";
-      } else {
-        player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
+  if (explosionTime>100){
+    //reset
+    explosionTime=false;
+    explosionIsActive=false;
+    //hide the explosion
+    document.querySelector(".explosionImage").src="";
+  }
+  if (alive){
+    //score
+    score+=0.1;
+    //update text
+    document.querySelector(".scoreText").innerHTML="Score: "+Math.floor(score).toString();
+
+
+    //first thing i do, i check if the key is pressed down
+    //i count how long the key is pressed for
+    //when key up, or when the key is held for a certain amount of time,
+    //the parabola starts
+
+    if (playerIsJumping){
+      console.log(jumpKeyIsDown);
+      if (height<maxHeight&&jumpKeyIsDown){
+        //console.log("hi");
+        height+=heightSpeed;
+        console.log("height",height);
+        //increase parabola speed
+        parabolaNum+=parabolaSpeed;
       }
-    } else if (-1*((3+x)**2)+9+currentY>=20){
-      /*
-      //if its about to teleport underneath the floor, set to 20 (ground height)
-      if (-1*((3+x)**2)+9+currentY<20){
-        player.style.bottom=20+"vh";
-        console.log("/////////////////////////////////////////////i down");
-        if (downKeyIsDown){
-          crouch();
+      x+=xSpeed;
+      playerHeight=(-1*(x-parabolaNum)**2)+(parabolaNum**2);
+    }
+    //set player top to playerHeight
+    
+      if (isNotDecreasing&&playerHeight*0.4+groundHeight>=20){
+        //if its about to teleport underneath the floor, set to 20 (ground height)
+        if (isNotDecreasing&&playerHeight*0.4+groundHeight<20){
+          player.style.bottom=20+"vh";
+        } else {
+          player.style.bottom=(playerHeight*0.4+groundHeight)+"vh";
         }
-      } else {
-        */if (-1*((5+x)**2)+25+currentY<20){
-          //if its about to teleport underneath the floor, set to 20 (ground height)
+      } else if (-1*((3+x)**2)+9+currentY>=20){
+        /*
+        //if its about to teleport underneath the floor, set to 20 (ground height)
+        if (-1*((3+x)**2)+9+currentY<20){
           player.style.bottom=20+"vh";
           console.log("/////////////////////////////////////////////i down");
+          if (downKeyIsDown){
+            crouch();
+          }
         } else {
-          player.style.bottom = (-1*((5+x)**2)+25+currentY)+"vh";
-        }
-        
-      //}
-    //console.log(player.style.top);
-  } else {
-    //if on ground, reset
-    //player.style.bottom=20+"vh";
-    height=0;
-    playerHeight=0;
-    playerIsJumping=false;
-    parabolaNum=5;
-    x=0;
-    downHasNotBeenPressed= true;
-    isNotDecreasing = true;
-    //parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
+          */if (-1*((5+x)**2)+25+currentY<20){
+            //if its about to teleport underneath the floor, set to 20 (ground height)
+            player.style.bottom=20+"vh";
+            console.log("/////////////////////////////////////////////i down");
+          } else {
+            player.style.bottom = (-1*((5+x)**2)+25+currentY)+"vh";
+          }
+          
+        //}
+      //console.log(player.style.top);
+    } else {
+      //if on ground, reset
+      //player.style.bottom=20+"vh";
+      height=0;
+      playerHeight=0;
+      playerIsJumping=false;
+      parabolaNum=5;
+      x=0;
+      downHasNotBeenPressed= true;
+      isNotDecreasing = true;
+      //parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
 
-    if (downKeyIsDown){
-      crouch();
-    }
-  }
-
-
-  //random obstacles
-  //adding to the counter based on the speed
-  //counter speed increases over time
-
-  //increasing speed over time
-  randomCounterSpeed+=speedIncrease;
-  obstacleSpeed+=speedIncrease;
-
-  //movement/spawning
-  randomCounter+=randomCounterSpeed;
-  obstacleX+=obstacleSpeed;
-  //console.log("randomCounter",randomCounter);
-  if (randomCounter >= nextObstacleAtCounter){
-    //reset counter
-    randomCounter=0;
-    //choose when next obstacle
-    //choose random number in a range, with a minimum distance
-    nextObstacleAtCounter = Math.floor(Math.random() * randomDistance) + minDistance;
-    //spawn the obstacle
-    chooseObstacle();
-  }
-
-  //move the obstacles in the list
-  for (let i = numberOfDeletedObstacles;i<numberOfObstacles;i++){
-    obstaclesXList[i]+=obstacleSpeed;
-    obstaclesList[i].style.right=obstaclesXList[i]+"vh";
-    //console.log("obstaclesXList[numberOfObstacles]");
-    if (obstaclesXList[i]>140){
-      //if past the screen, delete
-      obstaclesList[i].remove();
-      numberOfDeletedObstacles++;
-      //numberOfObstacles--;
-
-    }
-    
-    //checking for collisions with player
-    //checking x or right
-    //console.log("right",obstaclesList[i].getBoundingClientRect().right);
-    //console.log("width",obstaclesList[i].getBoundingClientRect().width);
-    //console.log("add",obstaclesList[i].getBoundingClientRect().right+obstaclesList[i].getBoundingClientRect().width);
-    let obstacleRight = obstaclesList[i].getBoundingClientRect().right;
-    let obstacleTop = obstaclesList[i].getBoundingClientRect().top;
-    let obstacleWidth = obstaclesList[i].getBoundingClientRect().width;
-    let obstacleHeight = obstaclesList[i].getBoundingClientRect().height;
-
-    let playerRight = player.getBoundingClientRect().right;
-    let playerTop = player.getBoundingClientRect().top;
-    let playerWidth = player.getBoundingClientRect().width;
-    let playerHeight = player.getBoundingClientRect().height;
-
-    //checking x or right
-    if (obstacleRight+obstacleWidth>playerRight
-      &&obstacleRight<playerRight+playerWidth
-      //checking y or bottom
-      &&obstacleTop+obstacleHeight>playerTop
-      &&obstacleTop<playerTop+playerHeight
-      ){
-        gameOver();
+      if (downKeyIsDown){
+        crouch();
       }
+    }
+
+
+    //random obstacles
+    //adding to the counter based on the speed
+    //counter speed increases over time
+
+    //increasing speed over time
+    randomCounterSpeed+=speedIncrease;
+    obstacleSpeed+=speedIncrease;
+
+    //movement/spawning
+    randomCounter+=randomCounterSpeed;
+    obstacleX-=obstacleSpeed;
+    //console.log("randomCounter",randomCounter);
+    if (randomCounter >= nextObstacleAtCounter){
+      //reset counter
+      randomCounter=0;
+      //choose when next obstacle
+      //choose random number in a range, with a minimum distance
+      nextObstacleAtCounter = Math.floor(Math.random() * randomDistance) + minDistance;
+      //spawn the obstacle
+      chooseObstacle();
+    }
+
+    //move the obstacles in the list
+    for (let i = numberOfDeletedObstacles;i<numberOfObstacles;i++){
+      obstaclesXList[i]-=obstacleSpeed;
+      obstaclesList[i].style.left=obstaclesXList[i]+"vh";
+      //console.log("obstaclesXList[numberOfObstacles]");
+      if (obstaclesXList[i]<15){
+        //if past the screen, delete
+        obstaclesList[i].remove();
+        numberOfDeletedObstacles++;
+        //numberOfObstacles--;
+
+        //show explosion
+        document.querySelector(".explosionImage").src="sprites/explosion.gif";
+        //using the timer to stop the explosion gif from looping again
+        explosionIsActive=true;
+
+      }
+      
+      //checking for collisions with player
+      //checking x or right
+      //console.log("right",obstaclesList[i].getBoundingClientRect().right);
+      //console.log("width",obstaclesList[i].getBoundingClientRect().width);
+      //console.log("add",obstaclesList[i].getBoundingClientRect().right+obstaclesList[i].getBoundingClientRect().width);
+      let obstacleLeft = obstaclesList[i].getBoundingClientRect().left;
+      let obstacleTop = obstaclesList[i].getBoundingClientRect().top;
+      let obstacleWidth = obstaclesList[i].getBoundingClientRect().width;
+      let obstacleHeight = obstaclesList[i].getBoundingClientRect().height;
+
+      let playerLeft = player.getBoundingClientRect().left;
+      let playerTop = player.getBoundingClientRect().top;
+      let playerWidth = player.getBoundingClientRect().width;
+      let playerHeight = player.getBoundingClientRect().height;
+
+      //checking x or right
+      if (obstacleLeft+obstacleWidth>playerLeft
+        &&obstacleLeft<playerLeft+playerWidth
+        //checking y or bottom
+        &&obstacleTop+obstacleHeight>playerTop
+        &&obstacleTop<playerTop+playerHeight
+        ){
+          gameOver();
+        }
+    }
+
   }
 }
 let randomNumber=1;
@@ -407,19 +435,31 @@ function spawnObstacle(className,speed){
   obstaclesList[numberOfObstacles].classList.add("test");
 
   //position
-  obstaclesList[numberOfObstacles].style.right=0+"vh";
+  obstaclesList[numberOfObstacles].style.left=-40+"vh";
   //keeping the x value
-  obstaclesXList[numberOfObstacles]=0;
+  obstaclesXList[numberOfObstacles]=200;
 
   numberOfObstacles++;
   console.log(obstaclesList);
+
+
+
+  //timer will stop once the explosion gif ends
+  //(this was a small bug that is very rare)
+  if (!alive){
+    stopTimerAfterExplosionCounter+=1;
+  }
+  if (stopTimerAfterExplosionCounter>150){
+    clearInterval(timer1);
+  }
 }
 
 function gameOver(){
   console.log("/////////////////////////////////////////////collision");
-  //stop the timer
-  clearInterval(timer1);
-
-  //show gameover menu
+  alive=false;
+  //timer will stop once the explosion gif ends
   
+  //show gameover menu
+  document.querySelector(".gameOver").style.display="block";
+
 }

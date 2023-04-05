@@ -70,3 +70,16 @@ header {
     background-image: "";
 }
 
+.start{
+    /*border: blue solid 2px;*/
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    top: 30vh;
+}
+.start :nth-child(1){
+    font-size: 10vh;
+}
+.start :nth-child(2){
+    font-size: 4vh;
+}

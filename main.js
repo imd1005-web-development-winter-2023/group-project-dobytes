@@ -80,8 +80,9 @@ const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 
 //start a timer
-let timer1 = setInterval(timer, 8);
+let timer1;
 //clearInterval(timer);
+let firstTime = true;
 
 //to check for height of jump when held
 let  playerIsJumping = false;
@@ -111,9 +112,13 @@ let obstacleSpeed = 0.3;
 let nextObstacleAtCounter = 300;
 let speedIncrease = 0.0001;
 
-let randomDistance = 400;
-let minDistance = 100;
+let randomDistance = 150;
+let minDistance = 150;
 
+//score
+let score = 0;
+
+let numberOfDeletedObstacles = 0;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -140,6 +145,7 @@ document.addEventListener("keyup",function(event){
   //87 is W
 
   if (event.keyCode===32||event.keyCode===38||event.keyCode===87){
+    firstTime = false;
     jumpKeyIsDown = false;
     
   }
@@ -172,16 +178,21 @@ document.addEventListener("mousedown",function(event){
 
 
 function playerUp(){
-  //console.log("playerUp");
-  //make a countJumpHeight to true
-  //if the player is on the ground, then you can jump
-  console.log(player.style.bottom);
-  if (height==0){
-    jumpKeyIsDown = true;
+  if (firstTime){
+    //hide the start menu
+    document.querySelector(".start").style.display = "none";
+    //start the timer
+    timer1 = setInterval(timer, 8);
+  } else {
+    //console.log("playerUp");
+    //make a countJumpHeight to true
+    //if the player is on the ground, then you can jump
+    console.log(player.style.bottom);
+    if (height==0){
+      jumpKeyIsDown = true;
+    }
+    playerIsJumping=true;
   }
-  
-  playerIsJumping=true;
-  
 }
 
 function playerDown(){
@@ -212,6 +223,12 @@ function crouch(){
 //let parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
 
 function timer(){
+  //score
+  score+=0.1;
+  //update text
+  document.querySelector(".scoreText").innerHTML="Score: "+Math.floor(score).toString();
+
+
   //first thing i do, i check if the key is pressed down
   //i count how long the key is pressed for
   //when key up, or when the key is held for a certain amount of time,
@@ -299,44 +316,74 @@ function timer(){
   }
 
   //move the obstacles in the list
-  for (let i = 0;i<numberOfObstacles;i++){
+  for (let i = numberOfDeletedObstacles;i<numberOfObstacles;i++){
     obstaclesXList[i]+=obstacleSpeed;
     obstaclesList[i].style.right=obstaclesXList[i]+"vh";
     //console.log("obstaclesXList[numberOfObstacles]");
     if (obstaclesXList[i]>140){
       //if past the screen, delete
       obstaclesList[i].remove();
+      numberOfDeletedObstacles++;
       //numberOfObstacles--;
 
     }
+    
+    //checking for collisions with player
+    //checking x or right
+    //console.log("right",obstaclesList[i].getBoundingClientRect().right);
+    //console.log("width",obstaclesList[i].getBoundingClientRect().width);
+    //console.log("add",obstaclesList[i].getBoundingClientRect().right+obstaclesList[i].getBoundingClientRect().width);
+    let obstacleRight = obstaclesList[i].getBoundingClientRect().right;
+    let obstacleTop = obstaclesList[i].getBoundingClientRect().top;
+    let obstacleWidth = obstaclesList[i].getBoundingClientRect().width;
+    let obstacleHeight = obstaclesList[i].getBoundingClientRect().height;
+
+    let playerRight = player.getBoundingClientRect().right;
+    let playerTop = player.getBoundingClientRect().top;
+    let playerWidth = player.getBoundingClientRect().width;
+    let playerHeight = player.getBoundingClientRect().height;
+
+    //checking x or right
+    if (obstacleRight+obstacleWidth>playerRight
+      &&obstacleRight<playerRight+playerWidth
+      //checking y or bottom
+      &&obstacleTop+obstacleHeight>playerTop
+      &&obstacleTop<playerTop+playerHeight
+      ){
+        gameOver();
+      }
   }
 }
 let randomNumber=1;
 function chooseObstacle(){
   //5 different obstacles:
-  //tall box (10%)
-  //short box (30%)
-  //long box (30%)
-  //flying knife (20%)
-  //low knife (10%)
+  //short box 3/15
+  //long box 3/15
+  //flying knife 2/15
+  //low knife 4/15
+  //tall box 3/15
+ 
+  
+  
+  
 
   //knives will be slightly faster
-  randomNumber = Math.floor(Math.random() * 10) + 1;
+  randomNumber = Math.floor(Math.random() * 15) + 1;
   console.log("randomnumber",randomNumber);
   if (randomNumber>=1&&randomNumber<=3){
-    //short box (30%)
+    //short box (3/15)
     spawnObstacle("obstacle1",10);
   } else if (randomNumber>=4&&randomNumber<=6){
-    //long box (30%)
+    //long box (3/15)
     spawnObstacle("obstacle2",10);
   } else if (randomNumber>=7&&randomNumber<=8){
-    //flying knife (20%)
+    //flying knife (3/15)
     spawnObstacle("obstacle3",15);
-  } else if (randomNumber==9){
-    //low knife (10%)
+  } else if (randomNumber>=9&&randomNumber<=13){
+    //low knife (3/15)
     spawnObstacle("obstacle4",15);
   } else {
-    //tall box (10%)
+    //tall box (3/15)
     spawnObstacle("obstacle5",10);
   }
 }
@@ -366,4 +413,13 @@ function spawnObstacle(className,speed){
 
   numberOfObstacles++;
   console.log(obstaclesList);
+}
+
+function gameOver(){
+  console.log("/////////////////////////////////////////////collision");
+  //stop the timer
+  clearInterval(timer1);
+
+  //show gameover menu
+  
 }

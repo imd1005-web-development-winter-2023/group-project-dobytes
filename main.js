@@ -138,7 +138,7 @@ let bounce=false;
 
 let xBackwards = 0;
 
-
+let shouldBounce=true;
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -432,6 +432,9 @@ function timer(){
     //first part of animation is the hop, i can change the parabola
     //to a short fast one
 
+    //rotating the player
+    player.style.transform +="rotate(10deg)";
+
     //should slowly move backwards
     xBackwards+=0.08;
 
@@ -442,6 +445,7 @@ function timer(){
       //todo
 
       //while video is playing:
+      
 
       //hide the explosion
       //reset
@@ -451,11 +455,13 @@ function timer(){
       document.querySelector(".explosionImage").src="";
 
       //change impostor sprite to dance
-      enemyImage.src="sprites/Brown/AmongUsDead.png";
+      enemyImage.src="sprites/Red/reddance.gif";
 
       //reset player position and rotation
       player.style.transform ="rotate(0deg)";
-      player.style.left =15+"vh";
+      player.style.left=15+"vh";
+      player.style.bottom=20+"vh";
+      shouldBounce=false;
       //change player sprite
       playerImage.src="sprites/Brown/AmongUsDead.png";
 
@@ -482,7 +488,10 @@ function timer(){
       //1/x * abs of sin10x
       //console.log("111111111111111111111111111111111111bouncing");
       //console.log("bouncing=",1/x*(Math.abs(Math.sin(10*x))))
-      player.style.bottom = 200/x*(Math.abs(Math.sin(0.5*x)))+20+"vh";
+      if (shouldBounce){
+        player.style.bottom = 200/x*(Math.abs(Math.sin(0.5*x)))+20+"vh";
+      }
+      
 
 
     } else {
@@ -501,8 +510,7 @@ function timer(){
       }
     }
     
-    //rotating the player
-    player.style.transform +="rotate(10deg)";
+    
 
     
     

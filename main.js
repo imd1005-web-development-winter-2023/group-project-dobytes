@@ -78,6 +78,7 @@ inititialise();
 const player = document.querySelector(".player");
 const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
+const enemyImage = document.querySelector(".enemyImage");
 
 //start a timer
 let timer1;
@@ -134,6 +135,10 @@ let isNotCrouching = true;
 let obstaclesRunning = true;
 
 let bounce=false;
+
+let xBackwards = 0;
+
+
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -427,6 +432,47 @@ function timer(){
     //first part of animation is the hop, i can change the parabola
     //to a short fast one
 
+    //should slowly move backwards
+    xBackwards+=0.08;
+
+    //if touching the impostor chasing
+    if (xBackwards>25){
+      //play the animation video
+      
+      //todo
+
+      //while video is playing:
+
+      //hide the explosion
+      //reset
+      explosionTime=false;
+      explosionIsActive=false;
+      //hide the explosion
+      document.querySelector(".explosionImage").src="";
+
+      //change impostor sprite to dance
+      enemyImage.src="sprites/Brown/AmongUsDead.png";
+
+      //reset player position and rotation
+      player.style.transform ="rotate(0deg)";
+      player.style.left =15+"vh";
+      //change player sprite
+      playerImage.src="sprites/Brown/AmongUsDead.png";
+
+
+      //stop the timer
+      clearInterval(timer1);
+
+      //show the gmaeovermenu
+      document.querySelector(".gameOver").style.display="block";
+      
+    } else {
+      //move the player backwards
+      player.style.left=35-xBackwards+"vh";
+    }
+   
+
+
 
     if (bounce){
       //bounce animation
@@ -441,10 +487,10 @@ function timer(){
 
     } else {
       //the hop animation
-      if (-1*(((10*x*0.1)-6)**2)+36+20+currentY<=20){
+      if (-1*(((10*x*0.1)-5)**2)+25+20+currentY<=20){
         //if its about to teleport underneath the map
         //teleport to ground coordinate instead
-
+        //player.style.bottom = 20+"vh";
         //reset the x, the first x intercept is at pi/10
         x=Math.PI/0.5;
         //start the bouncing animation, using a new equation
@@ -455,17 +501,18 @@ function timer(){
       }
     }
     
-
+    //rotating the player
     player.style.transform +="rotate(10deg)";
 
     
     
   }
+  /*
   if (stopTimerAfterExplosionCounter>300){
     console.log("stopped the timer");
     clearInterval(timer1);
     //play the video
-  }
+  }*/
 
   
 }

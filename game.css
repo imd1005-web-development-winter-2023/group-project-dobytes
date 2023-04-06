@@ -27,6 +27,7 @@ header {
     position: fixed;
     bottom: 20vh;
     left: 35vh;
+    z-index: 5;
 }
 .enemy{
     background-color: red;

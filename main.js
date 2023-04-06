@@ -131,6 +131,9 @@ let timerNotStarted = true;
 
 let isNotCrouching = true;
 
+let obstaclesRunning = true;
+
+let bounce=false;
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -250,6 +253,7 @@ function crouch(){
 
 function timer(){
   //explosion
+  //console.log("explostionTime",explosionTime);
   if (explosionIsActive){
     explosionTime+=1;
   }
@@ -331,6 +335,11 @@ function timer(){
     }
 
 
+    
+
+  }
+
+  if (obstaclesRunning){
     //random obstacles
     //adding to the counter based on the speed
     //counter speed increases over time
@@ -396,8 +405,69 @@ function timer(){
           gameOver();
         }
     }
-
   }
+
+
+  //timer will stop once the explosion gif ends
+  //(this was a small bug that is very rare)
+  if (!alive){
+    if (stopTimerAfterExplosionCounter==0){
+      //get the current y to jump starting there
+      //the bottom is a number like 20vh, so i converted to a string, removed the
+      //vh from the end, and converted back to a number
+      currentY=Number(player.style.bottom.toString().slice(0, -2));
+      console.log("current",currentY);
+      x=0;
+    }
+    stopTimerAfterExplosionCounter+=1;
+    x+=xSpeed;
+    console.log(stopTimerAfterExplosionCounter);
+    //death animation should play here
+
+    //first part of animation is the hop, i can change the parabola
+    //to a short fast one
+
+
+    if (bounce){
+      //bounce animation
+
+      //absolute of sinx * 1/x gives a bouncing effect
+      //i transformed it to match the game better
+      //1/x * abs of sin10x
+      //console.log("111111111111111111111111111111111111bouncing");
+      //console.log("bouncing=",1/x*(Math.abs(Math.sin(10*x))))
+      player.style.bottom = 200/x*(Math.abs(Math.sin(0.5*x)))+20+"vh";
+
+
+    } else {
+      //the hop animation
+      if (-1*(((10*x*0.1)-6)**2)+36+20+currentY<=20){
+        //if its about to teleport underneath the map
+        //teleport to ground coordinate instead
+
+        //reset the x, the first x intercept is at pi/10
+        x=Math.PI/0.5;
+        //start the bouncing animation, using a new equation
+        bounce=true;
+      } else {
+        //if not, do the hop
+        player.style.bottom = -1*(((10*x*0.1)-5)**2)+25+20+currentY+"vh";
+      }
+    }
+    
+
+    player.style.transform +="rotate(10deg)";
+
+    
+    
+  }
+  if (stopTimerAfterExplosionCounter>300){
+    console.log("stopped the timer");
+    clearInterval(timer1);
+    //play the video
+  }
+
+  
 }
 let randomNumber=1;
 function chooseObstacle(){
@@ -460,15 +530,21 @@ function spawnObstacle(className,speed){
   console.log(obstaclesList);
 
 
-
+  /*
   //timer will stop once the explosion gif ends
   //(this was a small bug that is very rare)
   if (!alive){
     stopTimerAfterExplosionCounter+=1;
+    console.log(stopTimerAfterExplosionCounter);
+    //death animation should play here
+
+    //first part of animation is the hop, i can change the parabola
+    //to a short fast one
+    
   }
   if (stopTimerAfterExplosionCounter>150){
     clearInterval(timer1);
-  }
+  }*/
 }
 
 function gameOver(){
@@ -477,6 +553,6 @@ function gameOver(){
   //timer will stop once the explosion gif ends
   
   //show gameover menu
-  document.querySelector(".gameOver").style.display="block";
+  //document.querySelector(".gameOver").style.display="block";
 
 }

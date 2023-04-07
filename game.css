@@ -12,6 +12,8 @@ header {
     justify-content: space-around; 
     font-size: 2rem;
 }
+
+
 .ground{
     position: fixed;
     bottom: 0px;
@@ -31,11 +33,11 @@ header {
 }
 .enemy{
     background-color: red;
-    height: 10vh;
-    width: 10vh;
+    height: 15vh;
+    width: 15vh;
     position: fixed;
     bottom: 20vh;
-    left: 5vh;
+    left: 0vh;
 }
 .explosion{
     background-color: transparent;
@@ -82,7 +84,7 @@ header {
 }
 .obstacle5{
     /*tall box*/
-    height: 30vh;
+    height: 25vh;
     width: 10vh;
     bottom: 20vh;
     background-image: "";

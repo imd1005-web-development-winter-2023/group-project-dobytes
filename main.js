@@ -1,84 +1,25 @@
-/*
-//
-//  JS File
-//  You may remove the code below - it's just boilerplate
-//
-
-//
-// Variables
-//
-
-// Constants
-const appID = "app";
-const headingText = "Develop. Preview. Ship.";
-const headingTextIcon = "🚀";
-const projectDueDate = "11 April 2023 11:59";
-
-// Variables
-let countdownDate = new Date(projectDueDate);
-
-// DOM Elements
-let appContainer = document.getElementById(appID);
-
-//
-// Functions
-//
-
-function calculateDaysLeft(countdownDate) {
-  const now = new Date().getTime();
-  const countdown = new Date(countdownDate).getTime();
-
-  const difference = (countdown - now) / 1000;
-
-  // Countdown passed already
-  if (difference < 1) {
-    return null;
-  }
-
-  const days = Math.floor(difference / (60 * 60 * 24));
-
-  return days;
-}
-
-// Add a heading to the app container
-function inititialise() {
-  // If anything is wrong with the app container then end
-  if (!appContainer) {
-    console.error("Error: Could not find app contianer");
-    return;
-  }
-
-  // Create an h1 and add it to our app
-  const h1 = document.createElement("h1");
-  const daysLeft = calculateDaysLeft(countdownDate);
-  let headingTextCalculated = headingText;
-
-  if (daysLeft) {
-    headingTextCalculated = headingTextCalculated.concat(
-      " In ",
-      daysLeft.toString(),
-      " days "
-    );
-  }
-  h1.textContent = headingTextCalculated.concat(headingTextIcon);
-  appContainer.appendChild(h1);
-
-  // Init complete
-  console.log("App successfully initialised");
-}
-
-//
-// Inits & Event Listeners
-//
-
-inititialise();
-*/
-
 //reference the elements
 const player = document.querySelector(".player");
 const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
+
+//colour select
+let colourIndex = 0;
+
+//array of colour sprites
+let colourWalkSprites = [
+"/sprites/Brown/brownrun.gif",
+"/sprites/Blue/bluerun.gif",
+"/sprites/Pink/pinkrun.gif",
+"/sprites/Green/greenrun.gif"];
+
+//array of colour sprites
+let colourDeadSprites = [
+  "/sprites/Brown/AmongUsDead.png",
+  "/sprites/Blue/AmongUsDead.png",
+  "/sprites/Pink/AmongUsDead.png",
+  "/sprites/Green/AmongUsDead.png"];
 
 //start a timer
 let timer1;
@@ -118,6 +59,9 @@ let minDistance = 150;
 
 //score
 let score = 0;
+let highscore = 0;
+
+
 
 let numberOfDeletedObstacles = 0;
 
@@ -139,6 +83,36 @@ let bounce=false;
 let xBackwards = 0;
 
 let shouldBounce=true;
+
+
+const btn = document.querySelector(".play_button");
+const radioButtons = document.querySelectorAll('input[name="size"]');
+
+
+btn.addEventListener('click', () => {
+  
+});
+
+
+
+
+//changing player colour
+function colourButtonClick(colourNum){
+  colourIndex=colourNum;
+  playerImage.src = colourWalkSprites[colourIndex];
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -172,11 +146,7 @@ document.addEventListener("keyup",function(event){
   //83 is S
   if (event.keyCode===40||event.keyCode===83){
     downKeyIsDown=false;
-    //should uncrouch
-    isNotCrouching = true;
-    console.log("uncrouch");
-    player.style.height= 10+"vh";
-    playerImage.style.height= 10+"vh";
+    unCrouch();
   }
 })
 
@@ -194,7 +164,13 @@ document.addEventListener("mousedown",function(event){
   }
 })
 */
-
+function unCrouch(){
+  //should uncrouch
+  isNotCrouching = true;
+  console.log("uncrouch");
+  player.style.height= 10+"vh";
+  playerImage.style.height= 10+"vh";
+}
 
 
 function playerUp(){
@@ -419,6 +395,7 @@ function timer(){
   //timer will stop once the explosion gif ends
   //(this was a small bug that is very rare)
   if (!alive){
+    unCrouch();
     if (stopTimerAfterExplosionCounter==0){
       //get the current y to jump starting there
       //the bottom is a number like 20vh, so i converted to a string, removed the
@@ -466,7 +443,7 @@ function timer(){
       player.style.bottom=20+"vh";
       shouldBounce=false;
       //change player sprite
-      playerImage.src="sprites/Brown/AmongUsDead.png";
+      playerImage.src = colourDeadSprites[colourIndex];
 
 
       //stop the timer
@@ -536,28 +513,26 @@ function chooseObstacle(){
   //low knife 4/15
   //tall box 3/15
  
-  
-  
-  
+
 
   //knives will be slightly faster
   randomNumber = Math.floor(Math.random() * 15) + 1;
   console.log("randomnumber",randomNumber);
-  if (randomNumber>=1&&randomNumber<=3){
-    //short box (3/15)
-    spawnObstacle("obstacle1",10);
-  } else if (randomNumber>=4&&randomNumber<=6){
+  if (randomNumber>=1&&randomNumber<=4){
+    //short box (4/15)
+    spawnObstacle("obstacle1");
+  } else if (randomNumber>=5&&randomNumber<=7){
     //long box (3/15)
-    spawnObstacle("obstacle2",10);
-  } else if (randomNumber>=7&&randomNumber<=8){
+    spawnObstacle("obstacle2");
+  } else if (randomNumber>=8&&randomNumber<=9){
+    //long knife (2/15)
+    spawnObstacle("obstacle3");
+  } else if (randomNumber>=10&&randomNumber<=12){
     //single knife (3/15)
-    spawnObstacle("obstacle3",15);
-  } else if (randomNumber>=9&&randomNumber<=13){
-    //long knife (3/15)
-    spawnObstacle("obstacle4",15);
+    spawnObstacle("obstacle4");
   } else {
     //tall box (3/15)
-    spawnObstacle("obstacle5",10);
+    spawnObstacle("obstacle5");
   }
 }
 
@@ -566,7 +541,7 @@ let numberOfObstacles = 0;
 
 let obstaclesXList = [];
 const main = document.querySelector(".obstaclesSection");
-function spawnObstacle(className,speed){
+function spawnObstacle(className){
   //main.innerHTML="hi";
   //creating the div
   //console.log(height,width,y,speed,image);

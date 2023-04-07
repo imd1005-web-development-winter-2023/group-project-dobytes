@@ -247,11 +247,14 @@ function playerDown(){
 }
 
 function crouch(){
-  isNotCrouching= false;
-  //should crouch
-  console.log("crouch");
-  player.style.height= 5+"vh";
-  playerImage.style.height= 5+"vh";
+  //only crouch if still alive
+  if (alive){
+    isNotCrouching= false;
+    //should crouch
+    console.log("crouch");
+    player.style.height= 5+"vh";
+    playerImage.style.height= 5+"vh";
+  }  
 }
 
 //let parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";

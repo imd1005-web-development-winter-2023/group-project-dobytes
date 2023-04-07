@@ -146,7 +146,11 @@ document.addEventListener("keyup",function(event){
   //83 is S
   if (event.keyCode===40||event.keyCode===83){
     downKeyIsDown=false;
-    unCrouch();
+    //should uncrouch
+    isNotCrouching = true;
+    console.log("uncrouch");
+    player.style.height= 10+"vh";
+    playerImage.style.height= 10+"vh";
   }
 })
 
@@ -164,13 +168,7 @@ document.addEventListener("mousedown",function(event){
   }
 })
 */
-function unCrouch(){
-  //should uncrouch
-  isNotCrouching = true;
-  console.log("uncrouch");
-  player.style.height= 10+"vh";
-  playerImage.style.height= 10+"vh";
-}
+
 
 
 function playerUp(){

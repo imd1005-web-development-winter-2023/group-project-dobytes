@@ -173,10 +173,7 @@ document.addEventListener("keyup",function(event){
   if (event.keyCode===40||event.keyCode===83){
     downKeyIsDown=false;
     //should uncrouch
-    isNotCrouching = true;
-    console.log("uncrouch");
-    player.style.height= 10+"vh";
-    playerImage.style.height= 10+"vh";
+    unCrouch();
   }
 })
 
@@ -194,6 +191,14 @@ document.addEventListener("mousedown",function(event){
   }
 })
 */
+
+function unCrouch(){
+  //should uncrouch
+  isNotCrouching = true;
+  console.log("uncrouch");
+  player.style.height= 10+"vh";
+  playerImage.style.height= 10+"vh";
+}
 
 
 

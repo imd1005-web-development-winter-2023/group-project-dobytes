@@ -550,10 +550,10 @@ function chooseObstacle(){
     //long box (3/15)
     spawnObstacle("obstacle2",10);
   } else if (randomNumber>=7&&randomNumber<=8){
-    //flying knife (3/15)
+    //single knife (3/15)
     spawnObstacle("obstacle3",15);
   } else if (randomNumber>=9&&randomNumber<=13){
-    //low knife (3/15)
+    //long knife (3/15)
     spawnObstacle("obstacle4",15);
   } else {
     //tall box (3/15)

@@ -5,7 +5,7 @@ const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
 
 
-let colourIndex=0;
+let colourIndex=0;//localStorage.getItem("playerColour");
 
 //array of colour sprites
 let colourWalkSprites = [
@@ -22,16 +22,47 @@ let colourDeadSprites = [
   "/sprites/Green/AmongUsDead.png"];
 
 //changing player colour
-function colourButtonClick(colourNum){
-  colourIndex=colourNum;
+function colourChangeWalkSprite(){
   playerImage.src = colourWalkSprites[colourIndex];
 }
 
+//when a page is loaded
+window.onload = (event) => {
+  console.log("page is fully loaded");
+  //check if its the game.html page
+  if ( document.URL.includes("game.html") ) {
+    console.log("this is the game page");
+    console.log("colourIndex",colourIndex);
+    colourChangeWalkSprite();
+  }
+};
 
 
-const btn = document.querySelector('.play_button');
+
+const btn = document.querySelector(".playButton");
 //const output = document.querySelector('#output');
-const radioButtons = document.querySelectorAll('input[name="size"]');
+const radioButtons = document.querySelectorAll('input[name="colorchoice"]');
+
+
+
+function colourButtonClick(){
+  console.log("clicked button");
+  let selectedColour = 0;
+  for (const radioButton of radioButtons) {
+      if (radioButton.checked) {
+          selectedColour = radioButton.value;
+          break;
+      }
+  }
+  // show the output:
+  localStorage.setItem("playerColour", selectedColour);
+  //console.log(colourIndex);
+  //colourChangeWalkSprite();
+}
+  
+//change colour as the game is loaded
+//colourChangeWalkSprite()
+
 
 
 
@@ -94,6 +125,9 @@ let bounce=false;
 let xBackwards = 0;
 
 let shouldBounce=true;
+
+let randomNumber=1;
+
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -128,7 +162,9 @@ document.addEventListener("keyup",function(event){
   if (event.keyCode===40||event.keyCode===83){
     downKeyIsDown=false;
     //should uncrouch
-    unCrouch();
+    if (alive){
+      unCrouch();
+    }
   }
 })
 
@@ -153,6 +189,9 @@ function unCrouch(){
   console.log("uncrouch");
   player.style.height= 10+"vh";
   playerImage.style.height= 10+"vh";
+
+  //change image back to walk
+  playerImage.src=colourWalkSprites[colourIndex];
 }
 
 
@@ -189,31 +228,40 @@ function playerUp(){
 }
 
 function playerDown(){
-  console.log("playerDown");
-  if (playerIsJumping){
-    //if down, shift the x value over so its decreasing
-    //can only press once, so downHasNotBeenPressed is used
-    if(downHasNotBeenPressed){
-      downHasNotBeenPressed = false;
-      //change the parabola equation to a decreasing one from the y that you are at
-      currentY=(playerHeight*0.4+groundHeight);
-      x=0;
-      isNotDecreasing=false;
+  if (alive){
+    console.log("playerDown");
+    if (playerIsJumping){
+      //if down, shift the x value over so its decreasing
+      //can only press once, so downHasNotBeenPressed is used
+      if(downHasNotBeenPressed){
+        downHasNotBeenPressed = false;
+        //change the parabola equation to a decreasing one from the y that you are at
+        currentY=(playerHeight*0.4+groundHeight);
+        x=0;
+        isNotDecreasing=false;
+      }
+    } else {
+      crouch();
     }
-  } else {
-    crouch();
   }
+  
   
 }
 
 function crouch(){
   //only crouch if still alive
-  if (alive){
+  //only crouch once, not over and over while the down key is pressed
+  if (alive&&isNotCrouching){
     isNotCrouching= false;
+    //change the sprite
+    playerImage.src="/sprites/Brown/AmongUsCrouch.png";
+
     //should crouch
     console.log("crouch");
     player.style.height= 5+"vh";
     playerImage.style.height= 5+"vh";
+
+    
   }  
 }
 
@@ -237,7 +285,6 @@ function timer(){
     score+=0.1;
     //update text
     document.querySelector(".scoreText").innerHTML="Score: "+Math.floor(score).toString();
-
 
     //first thing i do, i check if the key is pressed down
     //i count how long the key is pressed for
@@ -489,7 +536,7 @@ function timer(){
 
   
 }
-let randomNumber=1;
+
 function chooseObstacle(){
   //5 different obstacles:
   //short box 3/15
@@ -576,3 +623,36 @@ function gameOver(){
   //document.querySelector(".gameOver").style.display="block";
 
 }
+
+
+
+
+//leaderboard
+
+// saving highscore function
+function saveHighScore() {
+
+  // asks player for their username in order to store the score with a name
+      const username = prompt("Nice Score! Enter your name to be put into the leaderboards: ");
+  
+  // creates a constant that keeps the player's given name and the score they achieved during that run
+      const newScore = {
+          Score: score,
+          Name: username
+      };
+  
+  // makes sure the data is added
+      highScores.push(newScore);
+  
+  // orders all high scores in descending order
+      highScores.sort( (a, b) => b.Score - a.Score)
+  
+  // only keeps the top 6 high scores achieved and if a better one is accomplished, it gets rid of the lowest one
+      highScores.splice(6);
+  
+  // sets the scores to local storage so that they can be used and carried over into the leaderboard page
+      localStorage.setItem("highScores", JSON.stringify(highScores));
+  
+  // a quick check used to ensure the data is saved correctly in console
+      console.log(highScores);
+  };

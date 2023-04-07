@@ -4,8 +4,8 @@ const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
 
-//colour select
-let colourIndex = 0;
+
+let colourIndex=0;
 
 //array of colour sprites
 let colourWalkSprites = [
@@ -20,6 +20,20 @@ let colourDeadSprites = [
   "/sprites/Blue/AmongUsDead.png",
   "/sprites/Pink/AmongUsDead.png",
   "/sprites/Green/AmongUsDead.png"];
+
+//changing player colour
+function colourButtonClick(colourNum){
+  colourIndex=colourNum;
+  playerImage.src = colourWalkSprites[colourIndex];
+}
+
+
+
+const btn = document.querySelector('.play_button');
+//const output = document.querySelector('#output');
+const radioButtons = document.querySelectorAll('input[name="size"]');
+
+
 
 //start a timer
 let timer1;
@@ -59,9 +73,6 @@ let minDistance = 150;
 
 //score
 let score = 0;
-let highscore = 0;
-
-
 
 let numberOfDeletedObstacles = 0;
 
@@ -83,36 +94,6 @@ let bounce=false;
 let xBackwards = 0;
 
 let shouldBounce=true;
-
-
-const btn = document.querySelector(".play_button");
-const radioButtons = document.querySelectorAll('input[name="size"]');
-
-
-btn.addEventListener('click', () => {
-  
-});
-
-
-
-
-//changing player colour
-function colourButtonClick(colourNum){
-  colourIndex=colourNum;
-  playerImage.src = colourWalkSprites[colourIndex];
-}
-
-
-
-
-
-
-
-
-
-
-
-
 //when key down
 document.addEventListener("keydown",function(event){
   //jump is W, up arrow, left mouse
@@ -147,10 +128,7 @@ document.addEventListener("keyup",function(event){
   if (event.keyCode===40||event.keyCode===83){
     downKeyIsDown=false;
     //should uncrouch
-    isNotCrouching = true;
-    console.log("uncrouch");
-    player.style.height= 10+"vh";
-    playerImage.style.height= 10+"vh";
+    unCrouch();
   }
 })
 
@@ -168,6 +146,14 @@ document.addEventListener("mousedown",function(event){
   }
 })
 */
+
+function unCrouch(){
+  //should uncrouch
+  isNotCrouching = true;
+  console.log("uncrouch");
+  player.style.height= 10+"vh";
+  playerImage.style.height= 10+"vh";
+}
 
 
 
@@ -394,6 +380,7 @@ function timer(){
   //(this was a small bug that is very rare)
   if (!alive){
     unCrouch();
+
     if (stopTimerAfterExplosionCounter==0){
       //get the current y to jump starting there
       //the bottom is a number like 20vh, so i converted to a string, removed the
@@ -511,7 +498,9 @@ function chooseObstacle(){
   //low knife 4/15
   //tall box 3/15
  
-
+  
+  
+  
 
   //knives will be slightly faster
   randomNumber = Math.floor(Math.random() * 15) + 1;
@@ -539,7 +528,7 @@ let numberOfObstacles = 0;
 
 let obstaclesXList = [];
 const main = document.querySelector(".obstaclesSection");
-function spawnObstacle(className){
+function spawnObstacle(className,speed){
   //main.innerHTML="hi";
   //creating the div
   //console.log(height,width,y,speed,image);

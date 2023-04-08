@@ -4,8 +4,8 @@ const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
 
-
-let colourIndex=0;//localStorage.getItem("playerColour");
+//get from local storage
+let colourIndex=localStorage.getItem("playerColour");
 
 //array of colour sprites
 let colourWalkSprites = [
@@ -26,39 +26,26 @@ function colourChangeWalkSprite(){
   playerImage.src = colourWalkSprites[colourIndex];
 }
 
+initialize();
+
+function initialize(){
+  console.log(colourIndex);
+  colourChangeWalkSprite();
+}
+
+/*
 //when a page is loaded
 window.onload = (event) => {
   console.log("page is fully loaded");
   //check if its the game.html page
   if ( document.URL.includes("game.html") ) {
-    console.log("this is the game page");
-    console.log("colourIndex",colourIndex);
-    colourChangeWalkSprite();
+    
   }
 };
+*/
 
 
 
-const btn = document.querySelector(".playButton");
-//const output = document.querySelector('#output');
-const radioButtons = document.querySelectorAll('input[name="colorchoice"]');
-
-
-
-function colourButtonClick(){
-  console.log("clicked button");
-  let selectedColour = 0;
-  for (const radioButton of radioButtons) {
-      if (radioButton.checked) {
-          selectedColour = radioButton.value;
-          break;
-      }
-  }
-  // show the output:
-  localStorage.setItem("playerColour", selectedColour);
-  //console.log(colourIndex);
-  //colourChangeWalkSprite();
-}
   
 //change colour as the game is loaded
 //colourChangeWalkSprite()
@@ -244,9 +231,8 @@ function playerDown(){
       crouch();
     }
   }
-  
-  
 }
+
 
 function crouch(){
   //only crouch if still alive

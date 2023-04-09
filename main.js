@@ -4,22 +4,27 @@ const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
 
+/// THIS LINE IS THE ONE THAT BREAKS EVERYTING
+// constant called highScores that keeps all of the highscore data for the users, if there are no high scores, then it returns an empty array
+const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+/// THIS LINE IS THE ONE THAT BREAKS EVERYTING
+
 //get from local storage
 let colourIndex=localStorage.getItem("playerColour");
 
 //array of colour sprites
 let colourWalkSprites = [
-"/sprites/Brown/brownrun.gif",
-"/sprites/Blue/bluerun.gif",
-"/sprites/Pink/pinkrun.gif",
-"/sprites/Green/greenrun.gif"];
+"sprites/Brown/brownrun.gif",
+"sprites/LightBlue/bluerun.gif",
+"sprites/Pink/pinkrun.gif",
+"sprites/green/greenrun.gif"];
 
 //array of colour sprites
 let colourDeadSprites = [
-  "/sprites/Brown/AmongUsDead.png",
-  "/sprites/Blue/AmongUsDead.png",
-  "/sprites/Pink/AmongUsDead.png",
-  "/sprites/Green/AmongUsDead.png"];
+  "sprites/Brown/AmongUsDead.png",
+  "sprites/Blue/AmongUsDead.png",
+  "sprites/Pink/AmongUsDead.png",
+  "sprites/Green/AmongUsDead.png"];
 
 //changing player colour
 function colourChangeWalkSprite(){
@@ -239,7 +244,7 @@ function crouch(){
   if (alive&&isNotCrouching){
     isNotCrouching= false;
     //change the sprite
-    playerImage.src="/sprites/Brown/AmongUsCrouch.png";
+    playerImage.src="/sprites/Brown/AmongUsCrouch2.png";
 
     //should crouch
     console.log("crouch");
@@ -466,16 +471,17 @@ function timer(){
       //stop the timer
       clearInterval(timer1);
 
+      popUp();
+
       //show the gmaeovermenu
       document.querySelector(".gameOver").style.display="block";
+
       
     } else {
       //move the player backwards
       player.style.left=35-xBackwards+"vh";
     }
-   
-
-
+  
 
     if (bounce){
       //bounce animation
@@ -608,7 +614,10 @@ function gameOver(){
 
 }
 
-
+function popUp() {
+  // calling saveHighScore at completion of game in order to store the data for use in the leaderboards
+  saveHighScore();
+}
 
 
 //leaderboard
@@ -630,6 +639,7 @@ function saveHighScore() {
   
   // orders all high scores in descending order
       highScores.sort( (a, b) => b.Score - a.Score)
+  
   
   // only keeps the top 6 high scores achieved and if a better one is accomplished, it gets rid of the lowest one
       highScores.splice(6);

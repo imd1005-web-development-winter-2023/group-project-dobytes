@@ -4,6 +4,10 @@ const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
 
+
+
+
+
 //get from local storage
 let colourIndex=localStorage.getItem("playerColour");
 
@@ -46,7 +50,7 @@ window.onload = (event) => {
 
 
 
-  
+
 //change colour as the game is loaded
 //colourChangeWalkSprite()
 
@@ -240,7 +244,7 @@ function crouch(){
   if (alive&&isNotCrouching){
     isNotCrouching= false;
     //change the sprite
-    playerImage.src="/sprites/Brown/AmongUsCrouch.png";
+    playerImage.src="sprites/Brown/AmongUsCrouch2.png";
 
     //should crouch
     console.log("crouch");
@@ -414,7 +418,7 @@ function timer(){
   if (!alive){
     unCrouch();
 
-    if (stopTimerAfterExplosionCounter==0){
+    if (stopTimerAfterExplosidonCounter==0){
       //get the current y to jump starting there
       //the bottom is a number like 20vh, so i converted to a string, removed the
       //vh from the end, and converted back to a number
@@ -613,32 +617,33 @@ function gameOver(){
 
 
 
-//leaderboard
+// //leaderboard
 
-// saving highscore function
-function saveHighScore() {
+// // saving highscore function
+// function saveHighScore() {
 
-  // asks player for their username in order to store the score with a name
-      const username = prompt("Nice Score! Enter your name to be put into the leaderboards: ");
+//   // asks player for their username in order to store the score with a name
+//       const username = prompt("Nice Score! Enter your name to be put into the leaderboards: ");
   
-  // creates a constant that keeps the player's given name and the score they achieved during that run
-      const newScore = {
-          Score: score,
-          Name: username
-      };
+//   // creates a constant that keeps the player's given name and the score they achieved during that run
+//       const newScore = {
+//           Score: score,
+//           Name: username
+//       };
   
-  // makes sure the data is added
-      highScores.push(newScore);
+//   // makes sure the data is added
+//       highScores.push(newScore);
   
-  // orders all high scores in descending order
-      highScores.sort( (a, b) => b.Score - a.Score)
+//   // orders all high scores in descending order
+//       highScores.sort( (a, b) => b.Score - a.Score)
   
-  // only keeps the top 6 high scores achieved and if a better one is accomplished, it gets rid of the lowest one
-      highScores.splice(6);
   
-  // sets the scores to local storage so that they can be used and carried over into the leaderboard page
-      localStorage.setItem("highScores", JSON.stringify(highScores));
+//   // only keeps the top 6 high scores achieved and if a better one is accomplished, it gets rid of the lowest one
+//       highScores.splice(6);
   
-  // a quick check used to ensure the data is saved correctly in console
-      console.log(highScores);
-  };
+//   // sets the scores to local storage so that they can be used and carried over into the leaderboard page
+//       localStorage.setItem("highScores", JSON.stringify(highScores));
+  
+//   // a quick check used to ensure the data is saved correctly in console
+//       console.log(highScores);
+//   };

@@ -81,9 +81,9 @@ main {
 }
 
 .play_button button{
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-size: 2.2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 3rem;
 }
 
 .back_button {
@@ -117,4 +117,10 @@ button {
     padding: 15px;
     padding-left: 20px;
     padding-left: 20px;
+    transition: ease-out 0.6s;
 }
+
+button:hover {
+    box-shadow: inset 300px 0 0 0 red;
+    color: black;
+ }

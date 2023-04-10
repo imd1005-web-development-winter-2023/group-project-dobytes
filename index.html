@@ -22,14 +22,12 @@
             <button>LEADERBOARD</button>
           <h2>leaderboard</h2> 
           <img src="sprites/trophy.png">-->
-      
+          
             <div class="container">
                 <div id="highScores" class="flex-center"></div>
                 <h1 id="title">High Scores:</h1>
                 <ul id="highScoreList"></ul>
             </div>
-            <script src="leaderboard.js"></script>
-        
         </section>
         <section class="buttons">
           <div class="play">
@@ -46,6 +44,18 @@
         <video autoplay muted loop id="myvideo">
           <source src="videos/starsbackground.mp4" type="video/mp4">
       </video>
+      </section>
+      <section>
+        <audio src="sound/dripsong.mp3"></audio>
+      </section>
+      <section>
+        <script>
+      window.addEventListener("DOMContentLoaded", event => {
+      const audio = document.querySelector("audio");
+      audio.volume = 0.2;
+      audio.play();
+      });
+        </script>
       </section>
     </main>
     <script src="leaderboard.js"></script>

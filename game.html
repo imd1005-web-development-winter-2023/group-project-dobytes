@@ -26,20 +26,31 @@
       </div>
       <!--make the ground-->
       <div class="ground">ground</div>
-    </main>
-    <div class="obstaclesSection">
+    <div class="obstaclesSection"></div>
 
-    </div>
     <section class="start">
       <div>Jump to Start</div>
-      <div>Jump: Space/W/Up - Crouch,Fall: S/Down</div>
+      <div>Jump: Space/W/Up arrow - Crouch: S/Down arrow</div>
     </section>
     <section class="gameOver">
       <div class="over">Game Over</div>
       <a href="game.html"><button>Play Again</button></a>
       <a href="index.html"><button>Quit</button></a>
     </section>
-    
+
+    <!-- music -->
+      <section>
+        <audio src="sound/spaceshipmusic.mp3"></audio>
+        <script>
+          window.addEventListener("DOMContentLoaded", event => {
+          const audio = document.querySelector("audio");
+          console.log(audio)
+          audio.volume = 0.2;
+          audio.play();
+          });
+        </script>
+      </section>
+     </main>
     <script src="main.js"></script>
   </body>
 </html>

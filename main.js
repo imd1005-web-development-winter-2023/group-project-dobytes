@@ -14,17 +14,17 @@ let colourIndex=localStorage.getItem("playerColour");
 
 //array of colour sprites
 let colourWalkSprites = [
-"/sprites/Brown/brownrun.gif",
-"/sprites/LightBlue/bluerun.gif",
-"/sprites/Pink/pinkrun.gif",
-"/sprites/green/greenrun.gif"];
+"./sprites/Brown/brownrun.gif",
+"./sprites/LightBlue/bluerun.gif",
+"./sprites/Pink/pinkrun.gif",
+"./sprites/green/greenrun.gif"];
 
 //array of colour sprites
 let colourDeadSprites = [
-  "/sprites/Brown/AmongUsDead.png",
-  "/sprites/Blue/AmongUsDead.png",
-  "/sprites/Pink/AmongUsDead.png",
-  "/sprites/Green/AmongUsDead.png"];
+  "./sprites/Brown/AmongUsDead.png",
+  "./sprites/Blue/AmongUsDead.png",
+  "./sprites/Pink/AmongUsDead.png",
+  "./sprites/Green/AmongUsDead.png"];
 
 //changing player colour
 function colourChangeWalkSprite(){
@@ -36,7 +36,7 @@ initialize();
 function initialize(){
   //set highscore to highest score
   setHighscoreText();
-  console.log(colourIndex);
+  console.log("colour index",colourIndex);
   colourChangeWalkSprite();
 }
 function setHighscoreText(){
@@ -254,7 +254,7 @@ function crouch(){
   if (alive&&isNotCrouching){
     isNotCrouching= false;
     //change the sprite
-    playerImage.src="/sprites/Brown/AmongUsCrouch2.png";
+    playerImage.src="./sprites/Brown/AmongUsCrouch2.png";
 
     //should crouch
     console.log("crouch");

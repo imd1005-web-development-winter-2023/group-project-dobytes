@@ -8,3 +8,11 @@ highScoreList.innerHTML =
     highScores.map(newScore => {
         return `<li class="high-score">${newScore.Name} with a score of ${newScore.Score}</li>`;
     }).join("");
+
+// music
+    let play = document.getElementById("play");
+    function playMusic() {
+      let audio = new Audio("sound/dripsong.mp3");
+      audio.play()
+    }
+    play.addEventListener("click", playMusic);

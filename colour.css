@@ -35,6 +35,7 @@ main {
     justify-content: center;
     align-items: center;
     /* border: 7px solid red; */
+    cursor:pointer;
 }
 
 .blue{
@@ -42,6 +43,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor:pointer;
 }
 
 .pink{
@@ -49,6 +51,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor:pointer;
 }
 
 .green{
@@ -56,6 +59,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor:pointer;
 }
 
 [type=radio] {
@@ -65,12 +69,9 @@ main {
     height: 0;
 } 
 
-[type=radio] + img {
-    cursor:pointer;
-}
-
 [type=radio]:checked + img {
-    border: 7px solid red;
+    border: 5px groove white;
+    border-radius: 20%;
 }
 
 .play_button {

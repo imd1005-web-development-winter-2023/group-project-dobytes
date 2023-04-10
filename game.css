@@ -73,14 +73,14 @@ header {
     height: 50vh;
     width: 25vh;
     bottom: 25vh;
-    background-image: "";
+    background-image: url("/sprites/Obstacles/knifeLong.png");
 }
 .obstacle4{
     /*single knife*/
     height: 50vh;
     width: 10vh;
     bottom: 25vh;
-    background-image: "";
+    background-image: url("/sprites/Obstacles/knifeSingle2.png");
 }
 .obstacle5{
     /*tall box*/

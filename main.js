@@ -14,17 +14,17 @@ let colourIndex=localStorage.getItem("playerColour");
 
 //array of colour sprites
 let colourWalkSprites = [
-"sprites/Brown/brownrun.gif",
-"sprites/LightBlue/bluerun.gif",
-"sprites/Pink/pinkrun.gif",
-"sprites/green/greenrun.gif"];
+"/sprites/Brown/brownrun.gif",
+"/sprites/LightBlue/bluerun.gif",
+"/sprites/Pink/pinkrun.gif",
+"/sprites/green/greenrun.gif"];
 
 //array of colour sprites
 let colourDeadSprites = [
-  "sprites/Brown/AmongUsDead.png",
-  "sprites/Blue/AmongUsDead.png",
-  "sprites/Pink/AmongUsDead.png",
-  "sprites/Green/AmongUsDead.png"];
+  "/sprites/Brown/AmongUsDead.png",
+  "/sprites/Blue/AmongUsDead.png",
+  "/sprites/Pink/AmongUsDead.png",
+  "/sprites/Green/AmongUsDead.png"];
 
 //changing player colour
 function colourChangeWalkSprite(){
@@ -34,8 +34,18 @@ function colourChangeWalkSprite(){
 initialize();
 
 function initialize(){
+  //set highscore to highest score
+  setHighscoreText();
   console.log(colourIndex);
   colourChangeWalkSprite();
+}
+function setHighscoreText(){
+  console.log(localStorage.getItem("highScores"));
+  let text = 0;
+  if (localStorage.getItem("highScores")){
+    text = localStorage.getItem("highScores")[0].Score;
+  }
+ document.querySelector(".highscoreText").innerHTML="Highscore: "+text;
 }
 
 /*
@@ -442,6 +452,7 @@ function timer(){
 
     //if touching the impostor chasing
     if (xBackwards>25){
+      setTimeout(popUp, 500);
       //play the animation video
       
       //todo
@@ -471,10 +482,9 @@ function timer(){
       //stop the timer
       clearInterval(timer1);
 
-      popUp();
+      //popUp();
 
-      //show the gmaeovermenu
-      document.querySelector(".gameOver").style.display="block";
+      
 
       
     } else {
@@ -617,6 +627,8 @@ function gameOver(){
 function popUp() {
   // calling saveHighScore at completion of game in order to store the data for use in the leaderboards
   saveHighScore();
+  //show the gmaeovermenu
+  document.querySelector(".gameOver").style.display="block";
 }
 
 
@@ -649,4 +661,7 @@ function saveHighScore() {
   
   // a quick check used to ensure the data is saved correctly in console
       console.log(highScores);
+
+      // set the text
+      setHighscoreText();
   };

@@ -26,6 +26,8 @@ body {
    display: flex;
    justify-content: space-around;
    padding-top: 20px;
+   font-size: 4rem;
+   padding-right: 100px;
 }
 
 .buttons {
@@ -36,15 +38,10 @@ body {
     padding: 50px;
 }
 
-button {
-    padding: 10px;
-}
-
 .leaderboard {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
     border: 3px solid red;
 }
 
@@ -62,3 +59,18 @@ button {
     min-height: 100%;
     z-index: -10;
 }
+
+button {
+    outline:white solid 0.5px;
+    border-radius: 8px;
+    color:rgba(0,0,0,0.4);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: white;
+    padding: 15px;
+    padding-left: 20px;
+    padding-left: 20px;
+}
+

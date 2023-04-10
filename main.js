@@ -41,9 +41,9 @@ function initialize(){
 }
 function setHighscoreText(){
   console.log(localStorage.getItem("highScores"));
-  let text = 0;
-  if (localStorage.getItem("highScores")){
-    text = localStorage.getItem("highScores")[0].Score;
+  let text = "0";
+  if (JSON.parse(localStorage.getItem("highScores"))){
+    text = JSON.parse(localStorage.getItem("highScores"))[0].Score;
   }
  document.querySelector(".highscoreText").innerHTML="Highscore: "+text;
 }
@@ -636,6 +636,7 @@ function popUp() {
 
 // saving highscore function
 function saveHighScore() {
+    score=Math.floor(score);
 
   // asks player for their username in order to store the score with a name
       const username = prompt("Nice Score! Enter your name to be put into the leaderboards: ");
@@ -654,7 +655,7 @@ function saveHighScore() {
   
   
   // only keeps the top 6 high scores achieved and if a better one is accomplished, it gets rid of the lowest one
-      highScores.splice(6);
+      highScores.splice(5);
   
   // sets the scores to local storage so that they can be used and carried over into the leaderboard page
       localStorage.setItem("highScores", JSON.stringify(highScores));

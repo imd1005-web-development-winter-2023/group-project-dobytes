@@ -47,6 +47,8 @@ function initialize(){
   //stop the videos
   bgVideo.pause();
   groundvideo.pause();
+  //bug where image is in the ground
+  playerImage.style.height= 10+"vh";
 }
 function setHighscoreText(){
   console.log(localStorage.getItem("highScores"));
@@ -142,6 +144,10 @@ let randomNumber=1;
 let hasNotCrouched=true;
 
 let videoShouldPlay = true;
+
+let soundPlayOnceVariable = 0;
+
+let walkSound = new Audio("sound/walkingmetal.mp3");
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -284,6 +290,19 @@ function timer(){
     groundvideo.play();
     bgVideo.play();
   }
+
+  //play walk sound
+  if (playerIsJumping&&soundPlayOnceVariable==0){
+    soundPlayOnceVariable=1;
+    //stop walk sound
+    walkSound.pause();
+  }
+  if (!playerIsJumping&&soundPlayOnceVariable==1){
+    soundPlayOnceVariable=0;
+    //play walk sound
+    walkSound.play();
+  }
+
   //explosion
   //console.log("explostionTime",explosionTime);
   if (explosionIsActive){
@@ -365,10 +384,6 @@ function timer(){
         crouch();
       }
     }
-
-
-    
-
   }
 
   if (obstaclesRunning){
@@ -446,9 +461,14 @@ function timer(){
     if (hasNotCrouched){
       hasNotCrouched=false;
       unCrouch();
+      //play death sound
+      //stop walk sound
+      walkSound.pause();
+      let audio = new Audio("sound/deathSoundEffect.mp3");
+      audio.play()
+      
     }
     
-
     if (stopTimerAfterExplosionCounter==0){
       
       //get the current y to jump starting there

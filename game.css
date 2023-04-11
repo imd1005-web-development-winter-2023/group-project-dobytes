@@ -95,7 +95,7 @@ header {
     height: 50vh;
     width: 10vh;
     bottom: 25vh;
-    background-image: url("/sprites/Obstacles/knifeSingle2.png");
+    background-image: url("sprites/Obstacles/knifeSingle2.png");
     background-size: 10vh 50vh;
     background-repeat: no-repeat;
 }
@@ -104,7 +104,7 @@ header {
     height: 25vh;
     width: 10vh;
     bottom: 20vh;
-    background-image: url("/sprites/Obstacles/tallbox.png");
+    background-image: url("sprites/Obstacles/tallbox.png");
     background-size: 10vh 25vh;
     background-repeat: no-repeat;
     

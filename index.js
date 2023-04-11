@@ -65,7 +65,7 @@ function timerFunction(){
     flyingArray[flyingIndex].style.width = randomSize.toString()+"vh";
     //set the height
     flyingArray[flyingIndex].style.position = "fixed";
-    flyingArray[flyingIndex].style.bottom = Math.floor(Math.random() * 70) + 10+"vh";
+    flyingArray[flyingIndex].style.bottom = Math.floor(Math.random() * 70) + 2+"vh";
     //z index
     flyingArray[flyingIndex].style.zIndex = "-2";
     //increase index

@@ -36,6 +36,12 @@ let colourDeadSprites = [
   "./sprites/Pink/AmongUsDead.png",
   "./sprites/green/AmongUsDead.png"];
 
+//video speeds
+let bgSpeed = 0.5;
+let groundSpeed = 4;
+
+let bgSpeedIncrease = 0.02;
+let groundSpeedIncrease = 0.02;
 initialize();
 
 
@@ -157,8 +163,7 @@ let soundPlayOnceVariable = 0;
 let walkSound = new Audio("sound/walkingmetal.mp3");
 walkSound.volume = 0.13;
 
-let bgSpeed = 0.5;
-let groundSpeed = 0.5;
+
 
 //when key down
 document.addEventListener("keydown",function(event){

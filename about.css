@@ -7,12 +7,15 @@ body {
     font-family: myFont;
     color: white;
     font-size: 2rem;
+    font-weight: bold;
 }
 
 header {
     display: flex;
     justify-content: center; 
     font-size: 2rem;
+    padding-top: 50px;
+    padding-bottom: 40px;
 }
 
 .about {
@@ -54,3 +57,15 @@ button:hover {
     box-shadow: inset 300px 0 0 0 red;
     color: black;
  }
+
+.about {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+p {
+    font-weight: lighter;
+    padding-top: 30px;
+}

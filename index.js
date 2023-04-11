@@ -31,40 +31,56 @@ let colourWalkSprites = [
     "/sprites/Red/redrun.gif"];
 
 let spawnCounter = 0;
-let randomSpawnRate = 0;
+let randomSpawnRate = 1;
 
 let flyingIndex = 0;
 let flyingArray = [];
 let xArray = [];
 let speedArray=[];
-timer1 = setInterval(timerFunction, 10);
+let rotateArray=[];
+let rotateSpeedArray = [];
+let numOfDeleted = 0;
+timer1 = setInterval(timerFunction, 100);
 function timerFunction(){
-    spawnCounter+=0.1;
+    //console.log(Math.floor(spawnCounter));
+    spawnCounter++;
    if (spawnCounter>randomSpawnRate){
     spawnCounter=0;
     //get a new spawnrate
-    randomSpawnRate = Math.floor(Math.random() * 100) + 50;
+    randomSpawnRate = Math.floor(Math.random() * 60) + 30;
+    console.log("randomSpawnRate",randomSpawnRate);
     //instantiate new among us into array to access later
     flyingArray[flyingIndex]=(document.createElement("img"));
     document.querySelector("body").appendChild(flyingArray[flyingIndex]);
     xArray[flyingIndex]=-10;
-    flyingArray[flyingIndex].style.left="10vh";
-    speedArray[flyingIndex]=(Math.floor(Math.random() * 0.1) + 0.01);
+    flyingArray[flyingIndex].style.left="-15vh";
+    speedArray[flyingIndex]=(Math.floor(Math.random() * 3) + 1);
+    rotateArray[flyingIndex]=0;
+    rotateSpeedArray[flyingIndex]=(Math.floor(Math.random() * 20) + 8);
     //setting the image
-    flyingArray[flyingIndex]=Math.floor(Math.random() * 6);
+    flyingArray[flyingIndex].src=colourWalkSprites[0];//Math.floor(Math.random() * 6)];   
     //set the size
-    let randomSize = Math.floor(Math.random() * 15) + 10;
-    flyingArray[flyingIndex].style.height = randomSize+"vh";
-    flyingArray[flyingIndex].style.width = randomSize+"vh";
+    let randomSize = Math.floor(Math.random() * 10) + 10;
+    flyingArray[flyingIndex].style.height = randomSize.toString()+"vh";
+    flyingArray[flyingIndex].style.width = randomSize.toString()+"vh";
     //set the height
-    flyingArray[flyingIndex].style.bottom = Math.floor(Math.random() * 90) + 10+"vh";
+    flyingArray[flyingIndex].style.position = "fixed";
+    flyingArray[flyingIndex].style.bottom = Math.floor(Math.random() * 70) + 10+"vh";
+    //z index
+    flyingArray[flyingIndex].style.zIndex = "-2";
     //increase index
     flyingIndex++;
    }
-   /*
-   for(let i=0;i<flyingIndex;i++){
-    xArray[i]+=
-    flyingArray[i].style.left=xArray[]
-   }*/
+   
+   for(let i=numOfDeleted;i<flyingIndex;i++){
+    xArray[i]+=speedArray[i];
+    flyingArray[i].style.left=xArray[i]+"vh";
+    rotateArray[i]+=rotateSpeedArray[i];
+    flyingArray[i].style.transform ="rotate("+rotateArray[i].toString()+"deg)";
+    //delete if leaves the screen
+    if (xArray[i]>150){
+        numOfDeleted++;
+    }
+   }
 
 }

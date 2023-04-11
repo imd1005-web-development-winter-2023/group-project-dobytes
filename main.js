@@ -39,7 +39,7 @@ let colourDeadSprites = [
 
 //video speeds
 let bgSpeed = 1.5;
-let groundSpeed = 3 ;
+let groundSpeed = 4 ;
 
 let bgSpeedIncrease = 0.0001;
 let groundSpeedIncrease = 0.0001;
@@ -164,7 +164,7 @@ let soundPlayOnceVariable = 0;
 let walkSound = new Audio("sound/walkingmetal.mp3");
 walkSound.volume = 0.13;
 
-let ventSound = new Audio("sound/vent.mp3");
+let ventSound = new Audio("/sound/ventSound.mp3");
 
 
 
@@ -338,7 +338,7 @@ function timer(){
   //move enemy to the right
   if (enemyLeft<0){
     console.log("enemyMove=",enemyLeft);
-    enemyLeft+=0.05;
+    enemyLeft+=0.03;
     enemy.style.left=enemyLeft+"vh";
   }
   
@@ -563,7 +563,10 @@ function timer(){
       shouldBounce=false;
       //change player sprite
       playerImage.src = colourDeadSprites[colourIndex];
-
+      //change size
+      playerImage.style.marginTop = "4vh";
+      playerImage.style.height = "7vh";
+      playerImage.style.width = "8vh";
 
       //stop the timer
       clearInterval(timer1);

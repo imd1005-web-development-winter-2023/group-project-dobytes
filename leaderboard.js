@@ -23,7 +23,7 @@ highScoreList.innerHTML =
 
 
 //crazy effect
-let redImage = "/sprites/crewmate.png";
+let redImage = "sprites/crewmate.png";
 let redArray = [];
 let redArray2 = [];
 let x=-50;

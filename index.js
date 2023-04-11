@@ -46,6 +46,7 @@ function timerFunction(){
     randomSpawnRate = Math.floor(Math.random() * 100) + 50;
     //instantiate new among us into array to access later
     flyingArray[flyingIndex]=(document.createElement("img"));
+    document.querySelector("body").appendChild(flyingArray[flyingIndex]);
     xArray[flyingIndex]=-10;
     flyingArray[flyingIndex].style.left="10vh";
     speedArray[flyingIndex]=(Math.floor(Math.random() * 0.1) + 0.01);

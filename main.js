@@ -41,8 +41,8 @@ let colourDeadSprites = [
 let bgSpeed = 1.5;
 let groundSpeed = 4 ;
 
-let bgSpeedIncrease = 0.0002;
-let groundSpeedIncrease = 0.0001;
+let bgSpeedIncrease = 0.0003;
+//let groundSpeedIncrease = 0.0001;
 initialize();
 
 

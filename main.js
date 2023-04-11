@@ -41,7 +41,7 @@ let colourDeadSprites = [
 let bgSpeed = 1.5;
 let groundSpeed = 4 ;
 
-let bgSpeedIncrease = 0.0001;
+let bgSpeedIncrease = 0.0002;
 let groundSpeedIncrease = 0.0001;
 initialize();
 
@@ -162,7 +162,7 @@ let videoShouldPlay = true;
 let soundPlayOnceVariable = 0;
 
 let walkSound = new Audio("sound/walkingmetal.mp3");
-walkSound.volume = 0.13;
+walkSound.volume = 0.2;
 
 let ventSound = new Audio("/sound/ventSound.mp3");
 
@@ -331,7 +331,7 @@ function timer(){
 
   //video speeds
   bgSpeed+=bgSpeedIncrease;
-  groundSpeed+=groundSpeedIncrease;
+  //groundSpeed+=groundSpeedIncrease;
   bgVideo.playbackRate = bgSpeed;
   //groundvideo.playbackRate = groundSpeed;
 

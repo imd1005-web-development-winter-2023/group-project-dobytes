@@ -14,8 +14,8 @@ let colourIndex=localStorage.getItem("playerColour");
 
 //array of colour sprites
 let colourWalkSprites = [
-"./sprites/Brown/brownrun.gif",
-"./sprites/LightBlue/bluerun.gif",
+"./sprites/Brown/brownrun.gif", 
+"./sprites/LightBlue/lightbluerun.gif",
 "./sprites/Pink/pinkrun.gif",
 "./sprites/green/greenrun.gif"];
 

@@ -18,15 +18,16 @@ header {
 .ground{
     position: fixed;
     bottom: 0px;
-    background-color: gray;
+    background-color: #7F7957;
     width: 100%;
-    height: 20vh;
+    height: 22vh;
+    z-index: -5;
 }
 
 .player{
-    background-color: red;
+    background-color: transparent;
     height: 10vh;
-    width: 10vh;
+    width: 7vh;
     position: fixed;
     bottom: 20vh;
     left: 35vh;
@@ -38,8 +39,8 @@ header {
     height:10vh;*/
 }
 .enemy{
-    background-color: red;
-    height: 15vh;
+    background-color: transparent;
+    height: 13.9vh;
     width: 15vh;
     position: fixed;
     bottom: 20vh;
@@ -58,24 +59,26 @@ header {
 .test{
     background-color: transparent;
     position: fixed;
-    outline: solid white 1px;
+    /* outline: solid white 1px; */
 }
 
 .obstacle1{
     /*short box*/
     height: 10vh;
     width: 10vh;
-    bottom: 20vh;
+    bottom: 18vh;
     background-image: url("/sprites/Obstacles/smallbox.png");
     background-size: 10vh 10vh;
+    background-repeat: no-repeat;
 }
 .obstacle2{
     /*long box*/
-    height: 10vh;
+    height: 11vh;
     width: 20vh;
-    bottom: 20vh;
+    bottom: 18vh;
     background-image: url("/sprites/Obstacles/longbox.png");
     background-size: 20vh 10vh;
+    background-repeat: no-repeat;
 }
 .obstacle3{
     /*long knife*/
@@ -84,6 +87,7 @@ header {
     bottom: 25vh;
     background-image: url("/sprites/Obstacles/knifeLong.png");
     background-size: 25vh 50vh;
+    background-repeat: no-repeat;
 }
 .obstacle4{
     /*single knife*/
@@ -92,6 +96,7 @@ header {
     bottom: 25vh;
     background-image: url("/sprites/Obstacles/knifeSingle2.png");
     background-size: 10vh 50vh;
+    background-repeat: no-repeat;
 }
 .obstacle5{
     /*tall box*/
@@ -100,6 +105,7 @@ header {
     bottom: 20vh;
     background-image: url("/sprites/Obstacles/tallbox.png");
     background-size: 10vh 25vh;
+    background-repeat: no-repeat;
     
 }
 
@@ -116,6 +122,15 @@ header {
 }
 .start :nth-child(2){
     font-size: 4vh;
+}
+
+.shadow{
+    left: 33.5vh;
+    bottom: 19.5vh;
+    position: fixed;
+    height: 2.5vh;
+    width: 10vh;
+    z-index: -4;
 }
 
 .gameOver{

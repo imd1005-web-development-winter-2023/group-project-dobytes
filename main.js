@@ -23,16 +23,18 @@ let colourWalkSprites = [
 "./sprites/green/greenrun.gif"];
 
 //array of colour sprites
+let standingSprites = [
+  "./sprites/Brown/AmongUsWalking3.png", 
+  "./sprites/LightBlue/AmongUsWalking1.png",
+  "./sprites/Pink/AmongUsWalking1.png",
+  "./sprites/green/AmongUsWalking1.png"];
+
+//array of colour sprites
 let colourDeadSprites = [
   "./sprites/Brown/AmongUsDead.png",
   "./sprites/LightBlue/AmongUsDead.png",
   "./sprites/Pink/AmongUsDead.png",
   "./sprites/green/AmongUsDead.png"];
-
-//changing player colour
-function colourChangeWalkSprite(){
-  playerImage.src = colourWalkSprites[colourIndex];
-}
 
 initialize();
 
@@ -42,11 +44,14 @@ function initialize(){
   //set highscore to highest score
   setHighscoreText();
   console.log("colour index",colourIndex);
-  colourChangeWalkSprite();
+  //changing player colour
+  playerImage.src = standingSprites[colourIndex];
 
   //stop the videos
   bgVideo.pause();
   groundvideo.pause();
+  //bug where image is in the ground
+  playerImage.style.height= 10+"vh";
 }
 function setHighscoreText(){
   console.log(localStorage.getItem("highScores"));
@@ -142,6 +147,11 @@ let randomNumber=1;
 let hasNotCrouched=true;
 
 let videoShouldPlay = true;
+
+let soundPlayOnceVariable = 0;
+
+let walkSound = new Audio("sound/walkingmetal.mp3");
+walkSound.volume = 0.13;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -283,7 +293,23 @@ function timer(){
     videoShouldPlay = false;
     groundvideo.play();
     bgVideo.play();
+    walkSound.play();
+    //change sprite
+    playerImage.src = colourWalkSprites[colourIndex];
   }
+
+  //play walk sound
+  if (playerIsJumping&&soundPlayOnceVariable==0){
+    soundPlayOnceVariable=1;
+    //stop walk sound
+    walkSound.pause();
+  }
+  if (!playerIsJumping&&soundPlayOnceVariable==1){
+    soundPlayOnceVariable=0;
+    //play walk sound
+    walkSound.play();
+  }
+
   //explosion
   //console.log("explostionTime",explosionTime);
   if (explosionIsActive){
@@ -365,10 +391,6 @@ function timer(){
         crouch();
       }
     }
-
-
-    
-
   }
 
   if (obstaclesRunning){
@@ -446,9 +468,14 @@ function timer(){
     if (hasNotCrouched){
       hasNotCrouched=false;
       unCrouch();
+      //play death sound
+      //stop walk sound
+      walkSound.pause();
+      let audio = new Audio("sound/deathSoundEffect.mp3");
+      audio.play()
+      
     }
     
-
     if (stopTimerAfterExplosionCounter==0){
       
       //get the current y to jump starting there

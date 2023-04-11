@@ -91,3 +91,8 @@ button {
 .play {
     padding-bottom: 40px;
 }
+
+.scorestitle {
+    display: flex;
+    align-items: center;
+}

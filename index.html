@@ -17,15 +17,12 @@
     <main>
       <div class="home">
         <section class="leaderboard">
-          <!--
-          <a href="leaderboard.html">
-            <button>LEADERBOARD</button>
-          <h2>leaderboard</h2> 
-          <img src="sprites/trophy.png">-->
-          
             <div class="container">
                 <div id="highScores" class="flex-center"></div>
-                <h1 id="title">High Scores:</h1>
+                <div class="scorestitle">
+                  <h1 id="title">High Scores</h1>
+                  <img src="sprites/trophy.png">
+                </div>
                 <ul id="highScoreList"></ul>
             </div>
         </section>
@@ -43,7 +40,7 @@
       <section>
         <video autoplay muted loop id="myvideo">
           <source src="videos/starsbackground.mp4" type="video/mp4">
-      </video>
+        </video>
       </section>
       <!-- music -->
         <button id="play">Play Music!!</button>

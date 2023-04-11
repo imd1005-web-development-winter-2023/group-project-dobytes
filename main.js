@@ -6,7 +6,7 @@ const enemyImage = document.querySelector(".enemyImage");
 const enemy = document.querySelector(".enemy");
 
 const bgVideo = document.querySelector("#myvideo");
-const groundVideo = document.querySelector("#groudvideo");
+//const groundVideo = document.querySelector("#groudvideo");
 
 /// THIS LINE IS THE ONE THAT BREAKS EVERYTING
 // constant called highScores that keeps all of the highscore data for the users, if there are no high scores, then it returns an empty array
@@ -56,13 +56,13 @@ function initialize(){
 
   //stop the videos
   bgVideo.pause();
-  groundvideo.pause();
+  //groundvideo.pause();
   //bug where image is in the ground
   playerImage.style.height= 10+"vh";
 
   //make videos slow
   bgVideo.playbackRate = bgSpeed;
-  groundvideo.playbackRate = groundSpeed;
+  //groundvideo.playbackRate = groundSpeed;
 }
 function setHighscoreText(){
   console.log(localStorage.getItem("highScores"));
@@ -308,7 +308,7 @@ function crouch(){
 function timer(){
   if (videoShouldPlay){
     videoShouldPlay = false;
-    groundvideo.play();
+    //groundvideo.play();
     bgVideo.play();
     walkSound.play();
     //change sprite
@@ -333,7 +333,7 @@ function timer(){
   bgSpeed+=bgSpeedIncrease;
   groundSpeed+=groundSpeedIncrease;
   bgVideo.playbackRate = bgSpeed;
-  groundvideo.playbackRate = groundSpeed;
+  //groundvideo.playbackRate = groundSpeed;
 
   //move enemy to the right
   if (enemyLeft<0){
@@ -570,7 +570,7 @@ function timer(){
 
       //stop the timer
       clearInterval(timer1);
-      groundvideo.pause();
+      //groundvideo.pause();
       bgVideo.pause();
       //popUp();
 

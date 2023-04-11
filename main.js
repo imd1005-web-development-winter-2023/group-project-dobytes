@@ -23,16 +23,18 @@ let colourWalkSprites = [
 "./sprites/green/greenrun.gif"];
 
 //array of colour sprites
+let standingSprites = [
+  "./sprites/Brown/AmongUsWalking3.png", 
+  "./sprites/LightBlue/AmongUsWalking1.png",
+  "./sprites/Pink/AmongUsWalking1.png",
+  "./sprites/green/AmongUsWalking1.png"];
+
+//array of colour sprites
 let colourDeadSprites = [
   "./sprites/Brown/AmongUsDead.png",
   "./sprites/LightBlue/AmongUsDead.png",
   "./sprites/Pink/AmongUsDead.png",
   "./sprites/green/AmongUsDead.png"];
-
-//changing player colour
-function colourChangeWalkSprite(){
-  playerImage.src = colourWalkSprites[colourIndex];
-}
 
 initialize();
 
@@ -42,7 +44,8 @@ function initialize(){
   //set highscore to highest score
   setHighscoreText();
   console.log("colour index",colourIndex);
-  colourChangeWalkSprite();
+  //changing player colour
+  playerImage.src = standingSprites[colourIndex];
 
   //stop the videos
   bgVideo.pause();
@@ -148,6 +151,7 @@ let videoShouldPlay = true;
 let soundPlayOnceVariable = 0;
 
 let walkSound = new Audio("sound/walkingmetal.mp3");
+walkSound.volume = 0.13;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -289,6 +293,9 @@ function timer(){
     videoShouldPlay = false;
     groundvideo.play();
     bgVideo.play();
+    walkSound.play();
+    //change sprite
+    playerImage.src = colourWalkSprites[colourIndex];
   }
 
   //play walk sound

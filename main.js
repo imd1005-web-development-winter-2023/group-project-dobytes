@@ -26,9 +26,9 @@ let colourWalkSprites = [
 //array of colour sprites
 let standingSprites = [
   "./sprites/Brown/AmongUsCrouch2.png", 
-  "./sprites/LightBlue/AmongUsWalking1.png",
-  "./sprites/Pink/AmongUsWalking1.png",
-  "./sprites/green/AmongUsWalking1.png"];
+  "./sprites/LightBlue/bluecrouch.png",
+  "./sprites/Pink/pinkcrouch.png",
+  "./sprites/green/greencrouch.png"];
 
 //array of colour sprites
 let colourDeadSprites = [
@@ -292,7 +292,7 @@ function crouch(){
   if (alive&&isNotCrouching){
     isNotCrouching= false;
     //change the sprite
-    playerImage.src="./sprites/Brown/AmongUsCrouch2.png";
+    playerImage.src = standingSprites[colourIndex];
 
     //should crouch
     console.log("crouch");

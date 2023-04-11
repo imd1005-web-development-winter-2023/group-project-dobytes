@@ -27,8 +27,7 @@ let colourWalkSprites = [
     "./sprites/Brown/brownrun.gif", 
     "./sprites/LightBlue/lightbluerun.gif",
     "./sprites/Pink/pinkrun.gif",
-    "./sprites/green/greenrun.gif",
-    "/sprites/Red/redrun.gif"];
+    "./sprites/green/greenrun.gif"];
 
 let spawnCounter = 0;
 let randomSpawnRate = 1;
@@ -47,28 +46,29 @@ function timerFunction(){
    if (spawnCounter>randomSpawnRate){
     spawnCounter=0;
     //get a new spawnrate
-    randomSpawnRate = Math.floor(Math.random() * 60) + 30;
+    randomSpawnRate = Math.floor(Math.random() * 4) + 2;
     console.log("randomSpawnRate",randomSpawnRate);
     //instantiate new among us into array to access later
     flyingArray[flyingIndex]=(document.createElement("img"));
     document.querySelector("body").appendChild(flyingArray[flyingIndex]);
     xArray[flyingIndex]=-10;
     flyingArray[flyingIndex].style.left="-15vh";
-    speedArray[flyingIndex]=2;
+    speedArray[flyingIndex]=3;
     rotateArray[flyingIndex]=0;
     rotateSpeedArray[flyingIndex]=(Math.floor(Math.random() * 20) + 8);
     //setting the image
-    flyingArray[flyingIndex].src=colourWalkSprites[0];//Math.floor(Math.random() * 6)];   
+    flyingArray[flyingIndex].src=colourWalkSprites[Math.floor(Math.random() * 4)];   
     //set the size
-    let randomSize = Math.floor(Math.random() * 10) + 10;
+    let randomSize = Math.floor(Math.random() * 5) + 5;
     flyingArray[flyingIndex].style.height = randomSize.toString()+"vh";
     flyingArray[flyingIndex].style.width = randomSize.toString()+"vh";
     //set the height
     flyingArray[flyingIndex].style.position = "fixed";
-    flyingArray[flyingIndex].style.bottom = Math.floor(Math.random() * 70) + 2+"vh";
+    flyingArray[flyingIndex].style.bottom = Math.floor(Math.random() * 90) + 2+"vh";
     //z index
     flyingArray[flyingIndex].style.zIndex = "-2";
     //increase index
+    flyingArray[flyingIndex].style.opacity=0.5;
     flyingIndex++;
    }
    

@@ -10,15 +10,73 @@ highScoreList.innerHTML =
     }).join("");
 
 // music
-    let play = document.getElementById("play");
+    //let play = document.getElementById("play");
     function playMusic() {
       let audio = new Audio("sound/dripsong.mp3");
-      audio.play()
+      audio.play();
+      audio.loop = true;
     }
-    play.addEventListener("click", playMusic);
+    playMusic();
 
 
 
+
+
+//crazy effect
+let redImage = "/sprites/crewmate.png";
+let redArray = [];
+let redArray2 = [];
+let x=-50;
+let x2=-50;
+let timerCrazy=setInterval(timer2, 10);
+let toggle=1;
+clearTimeout(timerCrazy);
+
+function crazyFunction(){
+    if (toggle==1){
+        //make the among us sprites
+        for(let i=0;i<100;i++){
+            //snake
+            redArray[i]=(document.createElement("img"));
+            document.querySelector("body").appendChild(redArray[i]);
+            redArray[i].classList.add("red");
+            redArray[i].src=redImage;
+
+
+            //parametric equation
+            redArray2[i]=(document.createElement("img"));
+            document.querySelector("body").appendChild(redArray2[i]);
+            redArray2[i].classList.add("red");
+            redArray2[i].src=redImage;
+        }
+        timerCrazy=setInterval(timer2, 10);
+    } else {
+        clearTimeout(timerCrazy);
+        for(let i=0;i<100;i++){
+            redArray[i].remove();
+            redArray2[i].remove();
+        }
+        redArray = [];
+        redArray2 = [];
+    }
+    toggle*=-1;
+}
+crazy.addEventListener("click", crazyFunction);
+
+function timer2(){
+    console.log("hi");
+    x+=0.1;
+    x2+=0.1;
+    for(let i=0;i<100;i++){
+        let t=(x+(i*1));
+        redArray[i].style.left=i*2+"vh";
+        redArray[i].style.top=(        (5)*Math.sin((1/5*t))          )+20+"vh";
+
+        redArray2[i].style.left=20*(   Math.sin(3*t+(Math.PI/4))               )+93+"vh";
+        redArray2[i].style.top=20*(  Math.sin(4*(t))               )+56+"vh";
+    }
+}
+    
 
 //Random flying among us
 
@@ -47,7 +105,7 @@ function timerFunction(){
     spawnCounter=0;
     //get a new spawnrate
     randomSpawnRate = Math.floor(Math.random() * 4) + 2;
-    console.log("randomSpawnRate",randomSpawnRate);
+    //console.log("randomSpawnRate",randomSpawnRate);
     //instantiate new among us into array to access later
     flyingArray[flyingIndex]=(document.createElement("img"));
     document.querySelector("body").appendChild(flyingArray[flyingIndex]);

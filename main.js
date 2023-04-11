@@ -6,6 +6,7 @@ const enemyImage = document.querySelector(".enemyImage");
 const enemy = document.querySelector(".enemy");
 
 const bgVideo = document.querySelector("#myvideo");
+const deathVideo = document.querySelector("#deathvideo");
 //const groundVideo = document.querySelector("#groudvideo");
 
 /// THIS LINE IS THE ONE THAT BREAKS EVERYTING
@@ -507,7 +508,7 @@ function timer(){
       //stop walk sound
       walkSound.pause();
       let audio = new Audio("sound/deathSoundEffect.mp3");
-      audio.play()
+      audio.play();
       //hide shadow
       document.querySelector(".shadow").style.display="none";
       
@@ -542,7 +543,7 @@ function timer(){
       //play the animation video
       
       //todo
-
+      //deathVideo.play();
       //while video is playing:
       
 

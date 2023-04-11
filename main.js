@@ -52,6 +52,10 @@ function initialize(){
   groundvideo.pause();
   //bug where image is in the ground
   playerImage.style.height= 10+"vh";
+
+  //make videos slow
+  bgVideo.playbackRate = bgSpeed;
+  groundvideo.playbackRate = groundSpeed;
 }
 function setHighscoreText(){
   console.log(localStorage.getItem("highScores"));
@@ -152,6 +156,9 @@ let soundPlayOnceVariable = 0;
 
 let walkSound = new Audio("sound/walkingmetal.mp3");
 walkSound.volume = 0.13;
+
+let bgSpeed = 0.5;
+let groundSpeed = 0.5;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -473,6 +480,8 @@ function timer(){
       walkSound.pause();
       let audio = new Audio("sound/deathSoundEffect.mp3");
       audio.play()
+      //hide shadow
+      document.querySelector(".shadow").style.display="none";
       
     }
     

@@ -25,7 +25,7 @@ header {
 }
 
 .player{
-    background-color: transparent;
+    background-color: red;
     height: 10vh;
     width: 7vh;
     position: fixed;
@@ -59,7 +59,7 @@ header {
 .test{
     background-color: transparent;
     position: fixed;
-    /* outline: solid white 1px; */
+    outline: solid white 1px; 
 }
 
 .obstacle1{
@@ -125,11 +125,11 @@ header {
 }
 
 .shadow{
-    left: 33.5vh;
+    left: 35vh;
     bottom: 19.5vh;
     position: fixed;
-    height: 2.5vh;
-    width: 10vh;
+    height: 2vh;
+    width: 7.5vh;
     z-index: -4;
 }
 

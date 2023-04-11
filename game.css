@@ -26,7 +26,7 @@ header {
 }
 
 .player{
-    background-color: transparent;
+    background-color: red;
     height: 10vh;
     width: 7vh;
     position: fixed;

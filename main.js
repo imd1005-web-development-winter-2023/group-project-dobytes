@@ -547,8 +547,8 @@ function timer(){
       //deadVideo.play();
       
       
-      //let audio = new Audio("sound/deathSoundEffect.mp3");
-      //audio.play();
+      let audio = new Audio("sound/killSound.mp3");
+      audio.play();
 
 
       setTimeout(popUp, 500);

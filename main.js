@@ -3,9 +3,10 @@ const player = document.querySelector(".player");
 const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
+const enemy = document.querySelector(".enemy");
 
 const bgVideo = document.querySelector("#myvideo");
-const groundVideo = document.querySelector("#groudvideo");
+//const groundVideo = document.querySelector("#groudvideo");
 
 /// THIS LINE IS THE ONE THAT BREAKS EVERYTING
 // constant called highScores that keeps all of the highscore data for the users, if there are no high scores, then it returns an empty array
@@ -24,7 +25,7 @@ let colourWalkSprites = [
 
 //array of colour sprites
 let standingSprites = [
-  "./sprites/Brown/AmongUsWalking3.png", 
+  "./sprites/Brown/AmongUsCrouch2.png", 
   "./sprites/LightBlue/AmongUsWalking1.png",
   "./sprites/Pink/AmongUsWalking1.png",
   "./sprites/green/AmongUsWalking1.png"];
@@ -36,6 +37,12 @@ let colourDeadSprites = [
   "./sprites/Pink/AmongUsDead.png",
   "./sprites/green/AmongUsDead.png"];
 
+//video speeds
+let bgSpeed = 1.5;
+let groundSpeed = 4 ;
+
+let bgSpeedIncrease = 0.0001;
+let groundSpeedIncrease = 0.0001;
 initialize();
 
 
@@ -49,13 +56,13 @@ function initialize(){
 
   //stop the videos
   bgVideo.pause();
-  groundvideo.pause();
+  //groundvideo.pause();
   //bug where image is in the ground
   playerImage.style.height= 10+"vh";
 
   //make videos slow
   bgVideo.playbackRate = bgSpeed;
-  groundvideo.playbackRate = groundSpeed;
+  //groundvideo.playbackRate = groundSpeed;
 }
 function setHighscoreText(){
   console.log(localStorage.getItem("highScores"));
@@ -157,8 +164,11 @@ let soundPlayOnceVariable = 0;
 let walkSound = new Audio("sound/walkingmetal.mp3");
 walkSound.volume = 0.13;
 
-let bgSpeed = 0.5;
-let groundSpeed = 0.5;
+let ventSound = new Audio("/sound/ventSound.mp3");
+
+
+
+let enemyLeft = -15;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -298,11 +308,13 @@ function crouch(){
 function timer(){
   if (videoShouldPlay){
     videoShouldPlay = false;
-    groundvideo.play();
+    //groundvideo.play();
     bgVideo.play();
     walkSound.play();
     //change sprite
     playerImage.src = colourWalkSprites[colourIndex];
+    //vent noise
+    ventSound.play();
   }
 
   //play walk sound
@@ -316,6 +328,22 @@ function timer(){
     //play walk sound
     walkSound.play();
   }
+
+  //video speeds
+  bgSpeed+=bgSpeedIncrease;
+  groundSpeed+=groundSpeedIncrease;
+  bgVideo.playbackRate = bgSpeed;
+  //groundvideo.playbackRate = groundSpeed;
+
+  //move enemy to the right
+  if (enemyLeft<0){
+    console.log("enemyMove=",enemyLeft);
+    enemyLeft+=0.03;
+    enemy.style.left=enemyLeft+"vh";
+  }
+  
+
+
 
   //explosion
   //console.log("explostionTime",explosionTime);
@@ -535,11 +563,14 @@ function timer(){
       shouldBounce=false;
       //change player sprite
       playerImage.src = colourDeadSprites[colourIndex];
-
+      //change size
+      playerImage.style.marginTop = "4vh";
+      playerImage.style.height = "7vh";
+      playerImage.style.width = "8vh";
 
       //stop the timer
       clearInterval(timer1);
-      groundvideo.pause();
+      //groundvideo.pause();
       bgVideo.pause();
       //popUp();
 

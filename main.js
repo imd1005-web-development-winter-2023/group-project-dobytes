@@ -24,7 +24,7 @@ let colourWalkSprites = [
 
 //array of colour sprites
 let standingSprites = [
-  "./sprites/Brown/AmongUsWalking3.png", 
+  "./sprites/Brown/AmongUsCrouch2.png", 
   "./sprites/LightBlue/AmongUsWalking1.png",
   "./sprites/Pink/AmongUsWalking1.png",
   "./sprites/green/AmongUsWalking1.png"];
@@ -37,11 +37,11 @@ let colourDeadSprites = [
   "./sprites/green/AmongUsDead.png"];
 
 //video speeds
-let bgSpeed = 0.5;
-let groundSpeed = 4;
+let bgSpeed = 1.5;
+let groundSpeed = 3 ;
 
-let bgSpeedIncrease = 0.02;
-let groundSpeedIncrease = 0.02;
+let bgSpeedIncrease = 0.0001;
+let groundSpeedIncrease = 0.0001;
 initialize();
 
 
@@ -163,7 +163,9 @@ let soundPlayOnceVariable = 0;
 let walkSound = new Audio("sound/walkingmetal.mp3");
 walkSound.volume = 0.13;
 
+let ventSound = new Audio("sound/vent.mp3");
 
+const ene
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -308,6 +310,8 @@ function timer(){
     walkSound.play();
     //change sprite
     playerImage.src = colourWalkSprites[colourIndex];
+    //vent noise
+
   }
 
   //play walk sound
@@ -321,6 +325,17 @@ function timer(){
     //play walk sound
     walkSound.play();
   }
+
+  //video speeds
+  bgSpeed+=bgSpeedIncrease;
+  groundSpeed+=groundSpeedIncrease;
+  bgVideo.playbackRate = bgSpeed;
+  groundvideo.playbackRate = groundSpeed;
+
+  //move enemy to the right
+  enemyImage.left
+
+
 
   //explosion
   //console.log("explostionTime",explosionTime);

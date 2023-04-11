@@ -22,9 +22,9 @@ let colourWalkSprites = [
 //array of colour sprites
 let colourDeadSprites = [
   "./sprites/Brown/AmongUsDead.png",
-  "./sprites/Blue/AmongUsDead.png",
+  "./sprites/LightBlue/AmongUsDead.png",
   "./sprites/Pink/AmongUsDead.png",
-  "./sprites/Green/AmongUsDead.png"];
+  "./sprites/green/AmongUsDead.png"];
 
 //changing player colour
 function colourChangeWalkSprite(){
@@ -129,6 +129,8 @@ let xBackwards = 0;
 let shouldBounce=true;
 
 let randomNumber=1;
+
+let hasNotCrouched=true;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -426,9 +428,14 @@ function timer(){
   //timer will stop once the explosion gif ends
   //(this was a small bug that is very rare)
   if (!alive){
-    unCrouch();
+    if (hasNotCrouched){
+      hasNotCrouched=false;
+      unCrouch();
+    }
+    
 
     if (stopTimerAfterExplosionCounter==0){
+      
       //get the current y to jump starting there
       //the bottom is a number like 20vh, so i converted to a string, removed the
       //vh from the end, and converted back to a number

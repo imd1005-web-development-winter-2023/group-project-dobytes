@@ -34,10 +34,11 @@
     </section>
     <section class="gameOver">
       <div class="over">Game Over</div>
+      <div class="overbuttons">
       <a href="game.html"><button>Play Again</button></a>
       <a href="index.html"><button>Quit</button></a>
+      </div>
     </section>
-
     <!-- music -->
       <section>
         <audio src="sound/spaceshipmusic.mp3"></audio>
@@ -49,6 +50,12 @@
           audio.play();
           });
         </script>
+      </section>
+    <!-- background -->
+      <section>
+        <video autoplay muted loop id="myvideo">
+          <source src="videos/BgVideo.mp4" type="video/mp4">
+        </video>
       </section>
      </main>
     <script src="main.js"></script>

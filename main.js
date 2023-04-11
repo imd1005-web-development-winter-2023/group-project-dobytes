@@ -6,7 +6,7 @@ const enemyImage = document.querySelector(".enemyImage");
 const enemy = document.querySelector(".enemy");
 
 const bgVideo = document.querySelector("#myvideo");
-const deathVideo = document.querySelector("#deathvideo");
+//const deathVideo = document.querySelector("#deathvideo");
 //const groundVideo = document.querySelector("#groudvideo");
 
 /// THIS LINE IS THE ONE THAT BREAKS EVERYTING

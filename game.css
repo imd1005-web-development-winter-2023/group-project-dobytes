@@ -192,3 +192,6 @@ button:hover {
     object-fit: cover;
 }
 
+.playagain {
+    padding-right: 30px;
+}

@@ -54,7 +54,7 @@ function timerFunction(){
     document.querySelector("body").appendChild(flyingArray[flyingIndex]);
     xArray[flyingIndex]=-10;
     flyingArray[flyingIndex].style.left="-15vh";
-    speedArray[flyingIndex]=(Math.floor(Math.random() * 3) + 1);
+    speedArray[flyingIndex]=2;
     rotateArray[flyingIndex]=0;
     rotateSpeedArray[flyingIndex]=(Math.floor(Math.random() * 20) + 8);
     //setting the image
@@ -78,9 +78,9 @@ function timerFunction(){
     rotateArray[i]+=rotateSpeedArray[i];
     flyingArray[i].style.transform ="rotate("+rotateArray[i].toString()+"deg)";
     //delete if leaves the screen
-    if (xArray[i]>150){
+    if (xArray[i]>200){
         numOfDeleted++;
+        flyingArray[i].remove();
     }
    }
-
 }

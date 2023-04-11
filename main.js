@@ -6,6 +6,7 @@ const enemyImage = document.querySelector(".enemyImage");
 const enemy = document.querySelector(".enemy");
 
 const bgVideo = document.querySelector("#myvideo");
+const deadVideo = document.querySelector("amonguskill");
 //const deathVideo = document.querySelector("#deathvideo");
 //const groundVideo = document.querySelector("#groudvideo");
 
@@ -507,8 +508,11 @@ function timer(){
       //play death sound
       //stop walk sound
       walkSound.pause();
-      let audio = new Audio("sound/deathSoundEffect.mp3");
-      audio.play();
+      let audio2 = new Audio("sound/deathSoundEffect.mp3");
+      audio2.play();
+
+
+      
       //hide shadow
       document.querySelector(".shadow").style.display="none";
       
@@ -539,11 +543,21 @@ function timer(){
 
     //if touching the impostor chasing
     if (xBackwards>25){
+     // deadVideo.style.opacity = 100;
+      //deadVideo.play();
+      
+      
+      //let audio = new Audio("sound/deathSoundEffect.mp3");
+      //audio.play();
+
+
       setTimeout(popUp, 500);
       //play the animation video
       
       //todo
       //deathVideo.play();
+      //let video = document.querySelector("#amonguskill");
+      
       //while video is playing:
       
 

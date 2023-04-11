@@ -162,7 +162,7 @@ let videoShouldPlay = true;
 
 let soundPlayOnceVariable = 0;
 
-let walkSound = new Audio("sound/walkingmetal.mp3");
+let walkSound = new Audio("/sound/walkingmetal.mp3");
 walkSound.volume = 0.2;
 
 let ventSound = new Audio("/sound/ventSound.mp3");

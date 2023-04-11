@@ -68,7 +68,7 @@ header {
     height: 10vh;
     width: 10vh;
     bottom: 18vh;
-    background-image: url("/sprites/Obstacles/smallbox.png");
+    background-image: url("sprites/Obstacles/smallbox.png");
     background-size: 10vh 10vh;
     background-repeat: no-repeat;
 }
@@ -77,7 +77,7 @@ header {
     height: 11vh;
     width: 20vh;
     bottom: 18vh;
-    background-image: url("/sprites/Obstacles/longbox.png");
+    background-image: url("sprites/Obstacles/longbox.png");
     background-size: 20vh 10vh;
     background-repeat: no-repeat;
 }
@@ -86,7 +86,7 @@ header {
     height: 50vh;
     width: 25vh;
     bottom: 25vh;
-    background-image: url("/sprites/Obstacles/knifeLong.png");
+    background-image: url("sprites/Obstacles/knifeLong.png");
     background-size: 25vh 50vh;
     background-repeat: no-repeat;
 }

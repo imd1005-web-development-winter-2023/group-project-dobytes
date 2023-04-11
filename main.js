@@ -4,6 +4,9 @@ const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
 
+const bgVideo = document.querySelector("#myvideo");
+const groundVideo = document.querySelector("#groudvideo");
+
 /// THIS LINE IS THE ONE THAT BREAKS EVERYTING
 // constant called highScores that keeps all of the highscore data for the users, if there are no high scores, then it returns an empty array
 const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
@@ -33,11 +36,17 @@ function colourChangeWalkSprite(){
 
 initialize();
 
+
+
 function initialize(){
   //set highscore to highest score
   setHighscoreText();
   console.log("colour index",colourIndex);
   colourChangeWalkSprite();
+
+  //stop the videos
+  bgVideo.pause();
+  groundvideo.pause();
 }
 function setHighscoreText(){
   console.log(localStorage.getItem("highScores"));
@@ -131,6 +140,8 @@ let shouldBounce=true;
 let randomNumber=1;
 
 let hasNotCrouched=true;
+
+let videoShouldPlay = true;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -268,6 +279,11 @@ function crouch(){
 //let parabolaEquation = (playerHeight*0.4+groundHeight)+"vh";
 
 function timer(){
+  if (videoShouldPlay){
+    videoShouldPlay = false;
+    groundvideo.play();
+    bgVideo.play();
+  }
   //explosion
   //console.log("explostionTime",explosionTime);
   if (explosionIsActive){
@@ -281,6 +297,7 @@ function timer(){
     document.querySelector(".explosionImage").src="";
   }
   if (alive){
+    
     //score
     score+=0.1;
     //update text
@@ -486,7 +503,8 @@ function timer(){
 
       //stop the timer
       clearInterval(timer1);
-
+      groundvideo.pause();
+      bgVideo.pause();
       //popUp();
 
       

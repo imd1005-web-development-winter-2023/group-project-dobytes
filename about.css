@@ -1,0 +1,71 @@
+@font-face {
+    font-family: myFont;
+    src: url(amongusRegular.ttf);
+}
+
+body {
+    font-family: myFont;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+header {
+    display: flex;
+    justify-content: center; 
+    font-size: 2rem;
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+.about {
+    display: flex;
+    justify-content: center;  
+}
+
+.button {
+    display: flex;
+    justify-content: center; 
+}
+
+#myvideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -10;
+    object-fit: cover;
+}
+
+button {
+    outline:white solid 0.5px;
+    border-radius: 8px;
+    color:rgba(0,0,0,0.4);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: white;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: ease-out 0.6s;
+}
+
+button:hover {
+    box-shadow: inset 300px 0 0 0 red;
+    color: black;
+ }
+
+.about {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+p {
+    font-weight: lighter;
+    padding-top: 30px;
+}

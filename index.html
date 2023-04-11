@@ -1,37 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Set the page title -->
     <title>Group Project</title>
-
-    <!-- Set the charset we're using to UTF-8 -->
     <meta charset="UTF-8" />
-
-    <!-- Set the screens default zoom / scale to 1 -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- We are using a CSS Reset file to standardize browser default css -->
-    <link rel="stylesheet" href="./reset.css" />
-
-    <!-- This is where all of our awesome CSS code goes -->
-    <link rel="stylesheet" href="./style.css" />
-
-    <!-- Set the Favicon  -->
-    <link rel="icon" href="./images/favicon/rocket.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="sprites/crewmate.png" type="image/svg+xml" />
   </head>
   <body>
-    <!--
-
-      ADD YOUR GROUP PROJECT CODE
-
-      YOU MAY REMOVE THE BOILERPLATE CODE BELOW
-
-    -->
+    <header>
+      <div class="music">
+        <button id="crazy">ඞ❔ඞ</button>
+      </div>
+      <div class="title">
+        <h1>Imposter Dash</h1> <img src="sprites/crewmatedance.gif">
+      </div>
+    </header>
     <main>
-      <div id="app"></div>
+      <div class="home">
+        <section class="leaderboard">
+            <div class="container">
+                <div id="highScores" class="flex-center"></div>
+                <div class="scorestitle">
+                  <h1 id="title">High Scores</h1>
+                  <img src="sprites/trophy.png">
+                </div>
+                <ul id="highScoreList"></ul>
+            </div>
+        </section>
+        <section class="buttons">
+          <div class="play">
+            <a href="colour.html">
+              <button>PLAY</button>
+            </a>
+          </div>
+          <a href="about.html">
+            <button>ABOUT</button>
+          </a>
+        </section>
+      </div>
+      <section>
+        <video autoplay muted loop id="myvideo">
+          <source src="videos/starsbackground.mp4" type="video/mp4">
+        </video>
+      </section>
     </main>
-
-    <!-- This is where we add our awesome JavaScript code -->
-    <script src="./main.js"></script>
+    <script src="leaderboard.js"></script>
   </body>
+  <!-- <img class="flying" src="/sprites/green/greenrun.gif"> -->
 </html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Group Project</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="colour.css" />
+    <link rel="icon" href="sprites/crewmate.png" type="image/svg+xml" />
+  </head>
+  <body>
+    <header>
+        <h1>Colour Select</h1>
+    </header>
+    <main>
+      <section>
+        <video autoplay muted loop id="myvideo">
+          <source src="videos/starsbackground.mp4" type="video/mp4">
+      </video>
+      </section>
+      <section class="colours">
+        <!--onclick="colourButtonClick(0)"-->
+        <!-- <div class="brown">
+          <img src="sprites/Brown/AmongUsDance2.png" alt="Brown amongus">
+          <p>brown</p>
+        </div>
+        <div class="blue">
+          <img src="sprites/LightBlue/bluedance.gif" alt="Blue amongus">
+          <p>blue</p>
+        </div>
+        <div class="pink">
+          <img src="sprites/Pink/pinkdance.gif" alt="Pink amongus">
+          <p>pink</p>
+        </div>
+        <div class="green">
+          <img src="sprites/green/greendance.gif" alt="Green amongus">
+          <p>green</p>
+        </div> -->
+
+        <label class="brown">
+          <input type="radio" name="colorchoice" value="0">
+          <img src="sprites/Brown/browndance.gif" alt="Brown amongus">
+          <p>brown</p>
+        </label>
+        <label class="blue">
+          <input type="radio" name="colorchoice" value="1">
+          <img src="sprites/LightBlue/bluedance.gif" alt="Blue amongus">
+          <p>blue</p>
+        </label>
+        <label class="pink">
+          <input type="radio" name="colorchoice" value="2">
+          <img src="sprites/Pink/pinkdance.gif" alt="Pink amongus">
+          <p>pink</p>
+        </label>
+        <label class="green">
+          <input type="radio" name="colorchoice" value="3">
+          <img src="sprites/green/greendance.gif" alt="Green amongus">
+          <p>green</p>
+        </label>
+      </section>
+
+        <section class="play_button">
+          <a href="game.html">
+            <button onclick="colourButtonClick()">PLAY</button>
+          </a>
+        </section>
+        <section class="back_button">
+          <a href="index.html">
+              <button>Back</button>
+          </a>
+      </section>
+    </main>
+    <script src="colour.js"></script>
+  </body>
+</html>

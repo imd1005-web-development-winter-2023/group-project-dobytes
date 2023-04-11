@@ -1,0 +1,118 @@
+@font-face {
+    font-family: myFont;
+    src: url(amongusRegular.ttf);
+}
+
+body {
+    font-family: myFont;
+    color: white;
+    font-size: 2rem;
+}
+
+.title {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    font-size: 8vh;
+}
+
+.title img {
+    height: auto;
+    width: 150px;
+}
+
+.home {
+   display: flex;
+   justify-content: space-around;
+   padding-top: 20px;
+   font-size: 4rem;
+   padding-right: 100px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+}
+
+.leaderboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.leaderboard img {
+    height: auto;
+    width: 50px;
+}
+
+#myvideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -10;
+    object-fit: cover;
+}
+
+button {
+    outline:white solid 0.5px;
+    border-radius: 8px;
+    color:rgba(0,0,0,0.4);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: white;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    transition: ease-out 0.6s;
+}
+
+ button:hover {
+    box-shadow: inset 300px 0 0 0 red;
+    color: black;
+ }
+
+#title {
+    font-size: 4rem;
+}
+
+#highScoreList {
+    font-size: 2rem;
+}
+
+.play {
+    padding-bottom: 40px;
+}
+
+.scorestitle {
+    display: flex;
+    align-items: center;
+}
+
+.music {
+    display: flex;
+    padding-top: 40px;
+    padding-left: 50px;
+    font-size: 1.5rem;
+}
+
+h1 {
+    padding-right: 20px;
+}
+
+.flying{
+    height: 15vh;
+    width: 15vh;
+}
+
+.red{
+    height: 5vh;
+    width: 5vh;
+    z-index: 10;
+    position: fixed;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Group Project</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="game.css" />
+    <link rel="icon" href="sprites/crewmate.png" type="image/svg+xml" />
+  </head>
+  <body>
+    <header>
+        <p class="scoreText">Score: 0</p>
+        <p class="highscoreText">Highscore: 0</p>
+    </header>
+    <main>
+      <!--make the player-->
+      <div class="player">
+        <img class="playerImage" src="">
+      </div>
+      <img class="shadow" src="sprites/shadow.png">
+      <div class="explosion">
+        <img class="explosionImage" src="">
+      </div>
+      <div class="enemy">
+        <img class="enemyImage" src="sprites/Red/redrun.gif">
+      </div>
+      <!--make the ground-->
+      <div class="ground">
+        <!--
+        <video autoplay muted loop id="groundvideo">
+          <source src="videos/groundSize.mp4" type="video/mp4">
+        </video>
+      -->
+      </div>
+    <div class="obstaclesSection"></div>
+    <section>
+      <!-- <video autoplay muted id="deathvideo">
+        <source src="videos/amonguskill.mp4" type="video/mp4">
+    </section> -->
+    <section class="start">
+      <div>Jump to Start</div>
+      <div>Jump: Space/W/Up arrow - Crouch: S/Down arrow</div>
+    </section>
+    <section class="gameOver">
+      <div class="over">Game Over</div>
+      <div class="overbuttons">
+      <a href="game.html"><button>Play Again</button></a>
+      <a href="index.html"><button>Quit</button></a>
+      </div>
+    </section>
+    <!-- music -->
+      <section>
+        <audio src="sound/runningmusic.mp3"></audio>
+        <script>
+          window.addEventListener("DOMContentLoaded", event => {
+          const audio = document.querySelector("audio");
+          console.log(audio)
+          audio.volume = 0.1;
+          audio.loop = true;
+          audio.play();
+          });
+        </script>
+      </section>
+    <!-- background -->
+      <section>
+        <video autoplay muted loop id="myvideo">
+          <source src="videos/bgVideo.mp4" type="video/mp4">
+      </section>
+    <!-- death scene -->
+      <section>
+        <video autoplay muted loop id="amonguskill">
+          <source src="videos/amonguskill.mp4" type="video/mp4">
+      </section>
+     </main>
+    <script src="main.js"></script>
+  </body>
+</html>

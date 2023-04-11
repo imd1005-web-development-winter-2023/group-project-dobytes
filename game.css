@@ -1,0 +1,205 @@
+@font-face {
+    font-family: myFont;
+    src: url(amongusRegular.ttf);
+}
+
+body {
+    font-family: myFont;
+    background-color: #5a666b;
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-around; 
+    font-size: 2rem;
+}
+
+.ground{
+    position: fixed;
+    bottom: 0px;
+    background-color: #7F7957;
+    width: 100%;
+    height: 22vh;
+    z-index: -5;
+    border-top: solid 2px rgb(53, 53, 53);
+}
+
+.player{
+    background-color: transparent;
+    height: 10vh;
+    width: 7vh;
+    position: fixed;
+    bottom: 20vh;
+    left: 35vh;
+    z-index: 5;
+}
+.playerImage{
+    /*
+    width:10vh;
+    height:10vh;*/
+}
+.enemy{
+    background-color: transparent;
+    height: 13.9vh;
+    width: 15vh;
+    position: fixed;
+    bottom: 20vh;
+    left: -15vh;
+}
+.explosion{
+    background-color: transparent;
+    height: 20vh;
+    width: 20vh;
+    position: fixed;
+    bottom: 20vh;
+    left: 10vh;
+    z-index: 10;
+}
+
+.test{
+    background-color: transparent;
+    position: fixed;
+    /* outline: solid white 1px;  */
+}
+
+.obstacle1{
+    /*short box*/
+    height: 10vh;
+    width: 10vh;
+    bottom: 18vh;
+    background-image: url("sprites/Obstacles/smallbox.png");
+    background-size: 10vh 10vh;
+    background-repeat: no-repeat;
+}
+.obstacle2{
+    /*long box*/
+    height: 11vh;
+    width: 20vh;
+    bottom: 18vh;
+    background-image: url("sprites/Obstacles/longbox.png");
+    background-size: 20vh 10vh;
+    background-repeat: no-repeat;
+}
+.obstacle3{
+    /*long knife*/
+    height: 50vh;
+    width: 25vh;
+    bottom: 25vh;
+    background-image: url("sprites/Obstacles/knifeLong.png");
+    background-size: 25vh 50vh;
+    background-repeat: no-repeat;
+}
+.obstacle4{
+    /*single knife*/
+    height: 50vh;
+    width: 10vh;
+    bottom: 25vh;
+    background-image: url("sprites/Obstacles/knifeSingle2.png");
+    background-size: 10vh 50vh;
+    background-repeat: no-repeat;
+}
+.obstacle5{
+    /*tall box*/
+    height: 25vh;
+    width: 10vh;
+    bottom: 20vh;
+    background-image: url("sprites/Obstacles/tallbox.png");
+    background-size: 10vh 25vh;
+    background-repeat: no-repeat;
+    
+}
+
+.start{
+    /*border: blue solid 2px;*/
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    top: 30vh;
+    color: white;
+}
+.start :nth-child(1){
+    font-size: 10vh;
+}
+.start :nth-child(2){
+    font-size: 4vh;
+}
+
+.shadow{
+    left: 34.5vh;
+    bottom: 20vh;
+    position: fixed;
+    height: 2vh;
+    width: 8vh;
+    z-index: -4;
+}
+
+.gameOver{
+    /*border: blue solid 2px;*/
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    top: 30vh;
+    display: none;
+}
+.gameOver :nth-child(1){
+    font-size: 10vh;
+}
+.gameOver :nth-child(2){
+    font-size: 4vh;
+}
+.quitButtonLink{
+    font-size: 4vh;
+    height: 10px;
+}
+
+button {
+    outline:white solid 0.5px;
+    border-radius: 8px;
+    color:rgba(0,0,0,0.4);
+    border: none;
+    cursor: pointer;
+    background-color: blue 1.5;
+    color: black;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: ease-out 0.6s;
+}
+
+.over {
+    color: red;
+    font-weight: bold;
+}
+
+/*.overbuttons {
+    display:flex;
+    align-items:center;
+} */
+
+button:hover {
+    box-shadow: inset 300px 0 0 0 red;
+    color: black;
+ }
+
+#myvideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -10;
+    object-fit: cover;
+}
+
+
+#amonguskill {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 15;
+    object-fit: cover;
+    display:none;
+}

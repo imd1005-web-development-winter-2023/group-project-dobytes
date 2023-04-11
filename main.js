@@ -197,8 +197,6 @@ function unCrouch(){
   playerImage.src=colourWalkSprites[colourIndex];
 }
 
-
-
 function playerUp(){
   if (firstTime){
     //hide the start menu

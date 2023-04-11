@@ -22,6 +22,7 @@ header {
     width: 100%;
     height: 22vh;
     z-index: -5;
+    border-top: solid 2px rgb(53, 53, 53);
 }
 
 .player{
@@ -188,5 +189,6 @@ button:hover {
     min-width: 100%;
     min-height: 100%;
     z-index: -10;
+    object-fit: cover;
 }
 

@@ -13,7 +13,7 @@ body {
     display: flex;
     justify-content: center; 
     align-items: center;
-    font-size: 4rem;
+    font-size: 8vh;
 }
 
 .title img {
@@ -54,6 +54,7 @@ body {
     min-width: 100%;
     min-height: 100%;
     z-index: -10;
+    object-fit: cover;
 }
 
 button {
@@ -102,4 +103,9 @@ button {
 
 h1 {
     padding-right: 20px;
+}
+
+.flying{
+    height: 15vh;
+    width: 15vh;
 }

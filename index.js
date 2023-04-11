@@ -41,23 +41,29 @@ timer1 = setInterval(timerFunction, 10);
 function timerFunction(){
     spawnCounter+=0.1;
    if (spawnCounter>randomSpawnRate){
+    spawnCounter=0;
     //get a new spawnrate
     randomSpawnRate = Math.floor(Math.random() * 100) + 50;
     //instantiate new among us into array to access later
-    flyingArray.append(document.createElement("img"));
-    xArray.append(-15);
+    flyingArray[flyingIndex]=(document.createElement("img"));
+    xArray[flyingIndex]=-10;
+    flyingArray[flyingIndex].style.left="10vh";
+    speedArray[flyingIndex]=(Math.floor(Math.random() * 0.1) + 0.01);
     //setting the image
     flyingArray[flyingIndex]=Math.floor(Math.random() * 6);
     //set the size
     let randomSize = Math.floor(Math.random() * 15) + 10;
     flyingArray[flyingIndex].style.height = randomSize+"vh";
     flyingArray[flyingIndex].style.width = randomSize+"vh";
+    //set the height
+    flyingArray[flyingIndex].style.bottom = Math.floor(Math.random() * 90) + 10+"vh";
     //increase index
     flyingIndex++;
    }
+   /*
    for(let i=0;i<flyingIndex;i++){
     xArray[i]+=
     flyingArray[i].style.left=xArray[]
-   }
+   }*/
 
 }

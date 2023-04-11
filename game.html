@@ -25,7 +25,11 @@
         <img class="enemyImage" src="sprites/Red/redrun.gif">
       </div>
       <!--make the ground-->
-      <div class="ground">ground</div>
+      <div class="ground">
+        <video autoplay muted loop id="groundvideo">
+          <source src="videos/groundSize.mp4" type="video/mp4">
+        </video>
+      </div>
     <div class="obstaclesSection"></div>
 
     <section class="start">
@@ -55,7 +59,6 @@
       <section>
         <video autoplay muted loop id="myvideo">
           <source src="videos/BgVideo.mp4" type="video/mp4">
-        </video>
       </section>
      </main>
     <script src="main.js"></script>

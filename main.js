@@ -591,7 +591,7 @@ function spawnObstacle(className,speed){
   obstaclesList[numberOfObstacles].classList.add(className);
   //obstaclesList[numberOfObstacles].style.image="";
 
-  obstaclesList[numberOfObstacles].innerHTML="hi";
+  //obstaclesList[numberOfObstacles].innerHTML="hi";
   obstaclesList[numberOfObstacles].classList.add("test");
 
   //position

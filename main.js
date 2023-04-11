@@ -3,6 +3,7 @@ const player = document.querySelector(".player");
 const ground = document.querySelector(".ground");
 const playerImage = document.querySelector(".playerImage");
 const enemyImage = document.querySelector(".enemyImage");
+const enemy = document.querySelector(".enemy");
 
 const bgVideo = document.querySelector("#myvideo");
 const groundVideo = document.querySelector("#groudvideo");
@@ -165,7 +166,9 @@ walkSound.volume = 0.13;
 
 let ventSound = new Audio("sound/vent.mp3");
 
-const ene
+
+
+let enemyLeft = -15;
 
 //when key down
 document.addEventListener("keydown",function(event){
@@ -311,7 +314,7 @@ function timer(){
     //change sprite
     playerImage.src = colourWalkSprites[colourIndex];
     //vent noise
-
+    ventSound.play();
   }
 
   //play walk sound
@@ -333,7 +336,12 @@ function timer(){
   groundvideo.playbackRate = groundSpeed;
 
   //move enemy to the right
-  enemyImage.left
+  if (enemyLeft<0){
+    console.log("enemyMove=",enemyLeft);
+    enemyLeft+=0.05;
+    enemy.style.left=enemyLeft+"vh";
+  }
+  
 
 
 
